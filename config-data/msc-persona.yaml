@@ -1,19 +1,10 @@
 server:
-  port: 0
-spring:
-  cloud:
-    config:
-      uri: http://localhost:8001  # URL del servidor de configuración
-      fail-fast: true  # Configuración opcional para fallar rápidamente si no se puede conectar al servidor de configuración
-  discovery:
-    enabled: true  # Habilitar la integración con Eureka
-    instance-id: ${spring.application.name}:${random.value}  # Establecer un ID de instancia dinámico que incluye el nombre de la aplicación y un valor aleatorio
-    prefer-ip-address: true  # Configuración opcional para preferir la dirección IP en lugar del hostname en la URL de registro
-    instance:
-      instance-id: ${spring.cloud.discovery.instance-id}  # Utilizar el ID de instancia personalizado si se establece, de lo contrario usar el ID dinámico generado anteriormente
-      instance-port: ${server.port}  # Utilizar el puerto del servidor Spring Boot como puerto de instancia en Eureka
+  port: ${PORT:${SERVER_PORT:0}}
 eureka:
   client:
-    fetch-registry: true  # Habilitar la recuperación del registro de instancias de Eureka
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/  # URL del servidor Eureka
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+    instance:
+      instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
