@@ -9,5 +9,7 @@ spring:
           default-label: master
           uri: https://github.com/Steven77dev/backend-msc-sgr
           search-paths: config-data
+          username: steven77dev
+          password: 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
   application:
     name: config-server
