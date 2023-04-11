@@ -5,6 +5,3 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8001
-eureka:
-  client:
-    eureka-server-port: ${server.port}
