@@ -1,6 +1,9 @@
+
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  port: 8084
 eureka:
+  instance:
+    port: ${PORT:${SERVER_PORT:0}}
   client:
     fetch-registry: true
     register-with-eureka: true
