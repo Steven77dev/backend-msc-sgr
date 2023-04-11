@@ -17,4 +17,4 @@ eureka:
         instanceId: ${spring.application.instance_id:${random.value}}
       leaseRenewalIntervalInSeconds: 10 # ajusta este valor según tus necesidades
       leaseExpirationDurationInSeconds: 30 # ajusta este valor según tus necesidades
-      nonSecurePort: 0
+      non-secure-port-enabled: true
