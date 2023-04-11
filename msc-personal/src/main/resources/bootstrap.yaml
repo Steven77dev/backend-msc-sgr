@@ -7,4 +7,5 @@ spring:
       uri: http://localhost:8001
   application:
     name: msc-personal
-
+server:
+  port: 8081 # o cualquier otro puerto deseado para cada servicio

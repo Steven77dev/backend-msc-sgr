@@ -5,3 +5,5 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8001
+server:
+  port: 8082 # o cualquier otro puerto deseado para cada servicio
