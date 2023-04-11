@@ -7,9 +7,3 @@ spring:
       uri: http://localhost:8001
   application:
     name: msc-personal
-
-eureka:
-  instance:
-    port: ${server.port}
-
-spring.cloud.discovery.
