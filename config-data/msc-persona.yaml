@@ -4,7 +4,7 @@ spring:
       client:
         registration:
           msc-persona:
-            port: ${server.port:${SERVER_PORT:0}}
+            port: ${PORT:${SERVER_PORT:0}}
 eureka:
   client:
     fetch-registry: true
