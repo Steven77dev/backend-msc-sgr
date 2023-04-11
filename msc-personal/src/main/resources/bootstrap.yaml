@@ -7,4 +7,6 @@ spring:
   application:
     name: msc-personal
 
-eureka.defau
+eureka:
+  instance:
+    port: ${server.port}
