@@ -1,0 +1,62 @@
+# Ignorar archivos generados por el IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Ignorar archivos de compilación y dependencias de Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Ignorar archivos de compilación y dependencias de Gradle
+build/
+.gradle/
+gradle/
+
+
+
+# Ignorar archivos de registro y temporales
+logs/
+*.log
+*.log.*
+*.tmp
+
+# Ignorar archivos de respaldo
+*~
+
+# Ignorar archivos de carga y descarga de archivos
+*#*
+*.*~
+*.swp
+*.bak
+*.save
+*.iso
+*.jar
+*.exe
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Ignorar archivos de caché de Eclipse
+.project
+.classpath
+
+# Ignorar archivos de caché de IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+.idea_modules/
+
+# Ignorar archivos de caché de NetBeans
+nbproject/
+nbbuild/
+nbdist/
+nbactions.xml
