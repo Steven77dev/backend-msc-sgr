@@ -6,8 +6,8 @@ spring:
     config:
       server:
         git:
-          default-label: main
-          uri: https://github.com/Steven77dev/syst-restaurante
+          default-label: master
+          uri: https://github.com/Steven77dev/backend-msc-sgr
           search-paths: config-data
   application:
     name: config-server
