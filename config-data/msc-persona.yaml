@@ -1,10 +1,3 @@
-spring:
-  cloud:
-    discovery:
-      client:
-        registration:
-          msc-persona:
-            port: ${PORT:${SERVER_PORT:0}}
 eureka:
   client:
     fetch-registry: true
@@ -17,4 +10,4 @@ eureka:
         instanceId: ${spring.application.instance_id:${random.value}}
       leaseRenewalIntervalInSeconds: 10 # ajusta este valor según tus necesidades
       leaseExpirationDurationInSeconds: 30 # ajusta este valor según tus necesidades
-      non-secure-port-enabled: true
+       non-secure-port-enabled: true
