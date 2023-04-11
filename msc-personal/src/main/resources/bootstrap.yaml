@@ -1,6 +1,7 @@
 
 spring:
   cloud:
+
     config:
       enabled: true
       uri: http://localhost:8001
@@ -10,3 +11,5 @@ spring:
 eureka:
   instance:
     port: ${server.port}
+
+spring.cloud.discovery.
