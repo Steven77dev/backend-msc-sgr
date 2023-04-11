@@ -1,9 +1,11 @@
-
-server:
-  port: 8084
+spring:
+  cloud:
+    discovery:
+      client:
+        registration:
+          msc-personal:
+            port: ${server.port:${SERVER_PORT:0}}
 eureka:
-  instance:
-    port: ${PORT:${SERVER_PORT:0}}
   client:
     fetch-registry: true
     register-with-eureka: true
