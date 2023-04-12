@@ -1,8 +1,11 @@
-server:
-  port: 8761
+SERVER_PORT_SERVICE_DISCOVERY: 8761
+IP_ADDRESS_SERVICE_DISCOVERY: http://localhost
+
 eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+  # https://docs.spring.io/spring-cloud-netflix/docs/current/reference/html/#changing-the-eureka-instance-id
   client:
-    fetch-registry: false
-    register-with-eureka: false
     service-url:
-      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: ${IP_ADDRESS_SERVICE_DISCOVERY}:${SERVER_PORT_SERVICE_DISCOVERY}/eureka
+    lease-renewal-interval-in-seconds: 5
