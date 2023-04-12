@@ -30,7 +30,6 @@ spring:
             - Path=/swagger-ui/index.html
           filters:
             - RewritePath=/swagger-ui/(?<segment>.*), /${segment}
-              # Opcional: Agrega cabecera X-Frame-Options
             - AddResponseHeader=X-Frame-Options, SAMEORIGIN
         - id: swagger-persona
           uri: lb://msc-persona
@@ -38,7 +37,6 @@ spring:
             - Path=/swagger-ui/index.html
           filters:
             - RewritePath=/swagger-ui/(?<segment>.*), /${segment}
-              # Opcional: Agrega cabecera X-Frame-Options
-            - AddResponseHeader=X-Frame-Options, SAMEORIGIN        
+            - AddResponseHeader=X-Frame-Options, SAMEORIGIN     
 
       
