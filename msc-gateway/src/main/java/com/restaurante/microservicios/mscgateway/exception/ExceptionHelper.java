@@ -1,8 +1,7 @@
-package com.restaurante.microservicios.mscpersonal.exception;
+package com.restaurante.microservicios.mscgateway.exception;
 
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponseBuilder;
-import org.hibernate.service.spi.ServiceException;
+import com.restaurante.microservicios.mscgateway.utils.ApiResponse;
+import com.restaurante.microservicios.mscgateway.utils.ApiResponseBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -62,13 +61,6 @@ public class ExceptionHelper {
         return apiResponse;
     }
 
-    @ExceptionHandler(value = {ServiceException.class})
-    public ResponseEntity<ApiResponse<String>> handleServicioException(ServiceException ex) {
-        logger.error("ServiceException {}", ex.getMessage());
-        ResponseEntity apiResponse = responseBuilder.buildResponse( HttpStatus.BAD_REQUEST.value(),"Se presentó un error en el servicio",null);
-        ex.printStackTrace();
-        return apiResponse;
-    }
 
     @ExceptionHandler(value = {PersistenciaException.class})
     public ResponseEntity<ApiResponse<String>> handlerSQLSyntaxisError(PersistenciaException ex) {

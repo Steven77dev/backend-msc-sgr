@@ -7,6 +7,7 @@ import com.restaurante.microservicios.mscpersonal.entity.Persona;
 import com.restaurante.microservicios.mscpersonal.entity.Personal;
 import com.restaurante.microservicios.mscpersonal.entity.PersonalOficina;
 import com.restaurante.microservicios.mscpersonal.entity.PersonalOficinav2;
+import com.restaurante.microservicios.mscpersonal.exception.GatewayException;
 import com.restaurante.microservicios.mscpersonal.feignclients.PersonaFeignClient;
 import com.restaurante.microservicios.mscpersonal.mapper.PersonalMapper;
 import com.restaurante.microservicios.mscpersonal.mapper.PersonalOficinaMapper;
@@ -18,6 +19,7 @@ import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
 import com.restaurante.microservicios.mscpersonal.utils.ApiResponseBuilder;
 import com.restaurante.microservicios.mscpersonal.utils.Constante;
 import com.restaurante.microservicios.mscpersonal.utils.UtilRequest;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -80,7 +82,7 @@ public class PersonalOficinaService {
 
 
     @Transactional(readOnly = true)
-    public ResponseEntity<ApiResponse> listadoV2(int page, int size) throws IOException {
+    public ResponseEntity<ApiResponse> listadoV2(int page, int size) throws Exception {
         Pageable pageable = PageRequest.of(page, size);
         Page<PersonalOficinav2> paginado = personalOficinaRepositoryv2.findPersonalOficinaBy(pageable);
         List<PersonalAsignadoDTO> personalDto = paginado.map(personalOficinaMapper::toDto).getContent();
@@ -103,17 +105,21 @@ public class PersonalOficinaService {
         return restTemplate.getForObject("http://localhost:8091/persona/" + idPersona, Persona.class);
     }
 
-    //@CircuitBreaker(name = "persona-cb",fallbackMethod = "fallBackObtenerDatosPersonaFeign")
-    private PersonaModel obtenerDatosPersonaFeign(String idPersona) throws IOException  {
-        String responseBody =personaFeignClient.obtenerPorId(idPersona).getBody();
-        ApiResponse apiResponse =ApiResponseBuilder.desearializarApiResponse(responseBody);
-        if (apiResponse.getCodigo() == 200) {
-            return deserealizarRespuesta(apiResponse.getRespuesta(), new PersonaModel());
+    @CircuitBreaker(name = "persona-cb",fallbackMethod = "fallBackObtenerDatosPersonaFeign")
+    private PersonaModel obtenerDatosPersonaFeign(String idPersona) throws Exception {
+        try{
+            String responseBody =personaFeignClient.obtenerPorId(idPersona).getBody();
+            ApiResponse apiResponse =ApiResponseBuilder.desearializarApiResponse(responseBody);
+            if (apiResponse.getCodigo() == 200) {
+                return deserealizarRespuesta(apiResponse.getRespuesta(), new PersonaModel());
+            }
+            return new PersonaModel();
+        }catch (Exception e){
+            throw  new GatewayException("Error en el microservicio", e);
         }
-        return new PersonaModel();
     }
 
-    private PersonaModel fallBackObtenerDatosPersonaFeign(@PathVariable("idPersona") String idPersona) throws RuntimeException{
+    private PersonaModel fallBackObtenerDatosPersonaFeign(@PathVariable("idPersona") String idPersona, Throwable throwable){
         PersonaModel personaModel = new PersonaModel();
         personaModel.setPersona(idPersona);
         personaModel.setNombres("-");

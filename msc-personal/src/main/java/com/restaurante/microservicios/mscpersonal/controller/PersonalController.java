@@ -50,7 +50,7 @@ public class PersonalController {
     @GetMapping("/listar-personal-asignadoV2")
     @Operation(description ="Listado usando feignclient que consume el msc-persona", summary =  "Obtener listado de personal asignado a oficina y cargo")
     public ResponseEntity<ApiResponse> listarPersonalAsignadov2(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                                        @RequestParam(value = "size", defaultValue = "10") int size) throws IOException {
+                                                                        @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
         return personalOficinaService.listadoV2(page,size);
 
     }
