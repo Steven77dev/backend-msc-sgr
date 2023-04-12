@@ -27,16 +27,16 @@ spring:
         - id: swagger-personal
           uri: lb://msc-personal
           predicates:
-            - Path=/swagger-ui/index.html
+            - Path=/swagger-personal/**
           filters:
-            - RewritePath=/swagger-ui/(?<segment>.*), /${segment}
+            - RewritePath=/swagger-personal/(?<segment>.*), /${segment}
             - AddResponseHeader=X-Frame-Options, SAMEORIGIN
         - id: swagger-persona
           uri: lb://msc-persona
           predicates:
-            - Path=/swagger-ui/index.html
+            - Path=/swagger-persona/**
           filters:
-            - RewritePath=/swagger-ui/(?<segment>.*), /${segment}
-            - AddResponseHeader=X-Frame-Options, SAMEORIGIN     
+            - RewritePath=/swagger-persona/(?<segment>.*), /${segment}
+            - AddResponseHeader=X-Frame-Options, SAMEORIGIN
 
       
