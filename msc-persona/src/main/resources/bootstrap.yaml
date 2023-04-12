@@ -2,12 +2,6 @@ spring:
   application:
     name: msc-persona
   cloud:
-    discovery:
-      client:
-        registration:
-          msc-persona:
-            port: ${server.port:${SERVER_PORT:0}}
     config:
       enabled: true
       uri: http://localhost:8001
-
