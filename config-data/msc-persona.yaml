@@ -1,8 +1,7 @@
 server:
   port: ${PORT:${SERVER_PORT:0}}
 eureka: 
-  client:
-    eureka-server-port: ${server.port}
+  client: 
     fetch-registry: true
     register-with-eureka: true
     service-url:
