@@ -23,6 +23,24 @@ spring:
         - id: msc-personal
           uri: lb://msc-personal
           predicates:
-            - Path=/personal/**    
+            - Path=/personal/**
+        - id: swagger-personal
+          uri: lb://msc-personal
+          predicates:
+            - Path=/swagger/personal/**
+          filters:
+            - RewritePath=/swagger/personal/(?<segment>.*), /${segment}
+              # Opcional: Agrega cabecera X-Frame-Options
+            - AddResponseHeader=X-Frame-Options, SAMEORIGIN
+            - StripPrefix=2
+        - id: swagger-persona
+          uri: lb://msc-persona
+          predicates:
+            - Path=/swagger/persona/**
+          filters:
+            - RewritePath=/swagger/persona/(?<segment>.*), /${segment}
+              # Opcional: Agrega cabecera X-Frame-Options
+            - AddResponseHeader=X-Frame-Options, SAMEORIGIN
+            - StripPrefix=2        
 
       

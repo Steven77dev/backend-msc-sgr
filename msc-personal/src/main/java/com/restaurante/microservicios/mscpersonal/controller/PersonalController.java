@@ -3,8 +3,8 @@ package com.restaurante.microservicios.mscpersonal.controller;
 import com.restaurante.microservicios.mscpersonal.dto.RegistrarPersonalOficinaDTO;
 import com.restaurante.microservicios.mscpersonal.service.PersonalOficinaService;
 import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
-import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@Api(value = "Api-Personal", tags = "Servicios de personal y personal asignado")
+@Tag(name = "Api-Personal", description = "Servicios de personal y personal asignado")
 @RestController
 @RequestMapping("/personal")
 public class PersonalController {

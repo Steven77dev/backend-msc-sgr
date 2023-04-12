@@ -3,14 +3,14 @@ package com.restaurante.microservicios.mscpersonal.controller;
 import com.restaurante.microservicios.mscpersonal.entity.Cargo;
 import com.restaurante.microservicios.mscpersonal.service.CargoService;
 import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
-import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Api(value = "Api-Cargo", tags = "Servicios CRUD de Cargo")
+@Tag(name = "Api-Cargo", description = "Servicios CRUD de Cargo")
 @RestController
 @RequestMapping("/cargo")
 public class CargoController {

@@ -1,6 +1,6 @@
-package com.restaurante.microservicios.mscpersonal.config;
+package com.restaurante.microservicios.msclogistica.config;
 
-import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.*;
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

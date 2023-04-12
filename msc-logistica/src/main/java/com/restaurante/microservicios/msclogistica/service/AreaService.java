@@ -4,7 +4,7 @@ import com.restaurante.microservicios.msclogistica.dto.AreaDTO;
 import com.restaurante.microservicios.msclogistica.entity.Area;
 import com.restaurante.microservicios.msclogistica.repository.AreaRepository;
 import com.restaurante.microservicios.msclogistica.utils.ApiResponse;
-import com.restaurante.microservicios.msclogistica.utils.ResponseBuilder;
+import com.restaurante.microservicios.msclogistica.utils.ApiResponseBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +16,10 @@ import java.util.Optional;
 @Service
 public class AreaService {
 
-    private ResponseBuilder responseBuilder;
+    private ApiResponseBuilder responseBuilder;
    private AreaRepository areaRepository;
 
-   public AreaService(AreaRepository areaRepository, ResponseBuilder responseBuilder){
+   public AreaService(AreaRepository areaRepository, ApiResponseBuilder responseBuilder){
        this.areaRepository = areaRepository;
        this.responseBuilder = responseBuilder;
    }

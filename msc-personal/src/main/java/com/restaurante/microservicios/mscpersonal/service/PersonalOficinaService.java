@@ -26,6 +26,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -102,6 +103,7 @@ public class PersonalOficinaService {
         return restTemplate.getForObject("http://localhost:8091/persona/" + idPersona, Persona.class);
     }
 
+    //@CircuitBreaker(name = "persona-cb",fallbackMethod = "fallBackObtenerDatosPersonaFeign")
     private PersonaModel obtenerDatosPersonaFeign(String idPersona) throws IOException  {
         String responseBody =personaFeignClient.obtenerPorId(idPersona).getBody();
         ApiResponse apiResponse =ApiResponseBuilder.desearializarApiResponse(responseBody);
@@ -111,6 +113,14 @@ public class PersonalOficinaService {
         return new PersonaModel();
     }
 
+    private PersonaModel fallBackObtenerDatosPersonaFeign(@PathVariable("idPersona") String idPersona) throws RuntimeException{
+        PersonaModel personaModel = new PersonaModel();
+        personaModel.setPersona(idPersona);
+        personaModel.setNombres("-");
+        personaModel.setApellidoMaterno("-");
+        personaModel.setApellidoPaterno("-");
+        return personaModel;
+    }
 
 
     private PersonaModel deserealizarRespuesta(Object respuestaApiResponse, PersonaModel p)  {
