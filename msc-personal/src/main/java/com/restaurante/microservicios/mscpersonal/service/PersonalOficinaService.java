@@ -7,7 +7,6 @@ import com.restaurante.microservicios.mscpersonal.entity.Persona;
 import com.restaurante.microservicios.mscpersonal.entity.Personal;
 import com.restaurante.microservicios.mscpersonal.entity.PersonalOficina;
 import com.restaurante.microservicios.mscpersonal.entity.PersonalOficinav2;
-import com.restaurante.microservicios.mscpersonal.exception.GatewayException;
 import com.restaurante.microservicios.mscpersonal.feignclients.PersonaFeignClient;
 import com.restaurante.microservicios.mscpersonal.mapper.PersonalMapper;
 import com.restaurante.microservicios.mscpersonal.mapper.PersonalOficinaMapper;
@@ -19,7 +18,8 @@ import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
 import com.restaurante.microservicios.mscpersonal.utils.ApiResponseBuilder;
 import com.restaurante.microservicios.mscpersonal.utils.Constante;
 import com.restaurante.microservicios.mscpersonal.utils.UtilRequest;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,23 +27,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class PersonalOficinaService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private PersonalOficinaRepository personalOficinaRepository;
     @Autowired
     private PersonalOficinaRepositoryv2 personalOficinaRepositoryv2;
     private PersonalRepository personalRepository;
-    private final ApiResponseBuilder responseBuilder;
+    private final ApiResponseBuilder<Object> responseBuilder;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -55,7 +53,7 @@ public class PersonalOficinaService {
     @Autowired
     private PersonaFeignClient personaFeignClient;
 
-    public PersonalOficinaService(PersonalOficinaRepository personalOficinaRepository, ApiResponseBuilder responseBuilder, PersonalOficinaMapper personalOficinaMapper,
+    public PersonalOficinaService(PersonalOficinaRepository personalOficinaRepository, ApiResponseBuilder<Object> responseBuilder, PersonalOficinaMapper personalOficinaMapper,
                                   PersonalMapper personalMapper, PersonalRepository personalRepository) {
         this.personalOficinaRepository = personalOficinaRepository;
         this.personalRepository = personalRepository;
@@ -65,7 +63,7 @@ public class PersonalOficinaService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<ApiResponse> listado(int page, int size) {
+    public ResponseEntity<ApiResponse<Object>> listado(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<PersonalOficina> paginado = personalOficinaRepository.findPersonalOficinaBy(pageable);
         List<PersonalAsignadoDTO> personalDto = paginado.map(personalOficinaMapper::toDto).getContent();
@@ -73,7 +71,7 @@ public class PersonalOficinaService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<ApiResponse> listadoSinPaginado() {
+    public ResponseEntity<ApiResponse<Object>> listadoSinPaginado() {
         List<PersonalOficina> listado = personalOficinaRepository.findAll();
 
         List<PersonalAsignadoDTO> personalDto = listado.stream().map(personalOficinaMapper::toDto).collect(Collectors.toList());
@@ -82,7 +80,7 @@ public class PersonalOficinaService {
 
 
     @Transactional(readOnly = true)
-    public ResponseEntity<ApiResponse> listadoV2(int page, int size) throws Exception {
+    public ResponseEntity<ApiResponse<Object>> listadoV2(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<PersonalOficinav2> paginado = personalOficinaRepositoryv2.findPersonalOficinaBy(pageable);
         List<PersonalAsignadoDTO> personalDto = paginado.map(personalOficinaMapper::toDto).getContent();
@@ -90,11 +88,11 @@ public class PersonalOficinaService {
             if (dto.getCodigoEstado() == 1) {
                 //System.out.println(obtenerDatosPersonaRestTemplate(personalOfina.getPersonal().getPersona()).toString());
                 PersonaModel persona = obtenerDatosPersonaFeign(dto.getCodigoPersona());
-               if(StringUtils.hasLength(persona.getPersona())){
-                   dto.setNombres(persona.getNombres());
-                   dto.setApellidoPaterno(persona.getApellidoPaterno());
-                   dto.setApellidoMaterno(persona.getApellidoMaterno());
-               }
+                if (persona != null) {
+                    dto.setNombres(persona.getNombres());
+                    dto.setApellidoPaterno(persona.getApellidoPaterno());
+                    dto.setApellidoMaterno(persona.getApellidoMaterno());
+                }
 
             }
         }
@@ -105,38 +103,22 @@ public class PersonalOficinaService {
         return restTemplate.getForObject("http://localhost:8091/persona/" + idPersona, Persona.class);
     }
 
-    @CircuitBreaker(name = "persona-cb",fallbackMethod = "fallBackObtenerDatosPersonaFeign")
-    private PersonaModel obtenerDatosPersonaFeign(String idPersona) throws Exception {
-        try{
-            String responseBody =personaFeignClient.obtenerPorId(idPersona).getBody();
-            ApiResponse apiResponse =ApiResponseBuilder.desearializarApiResponse(responseBody);
-            if (apiResponse.getCodigo() == 200) {
-                return deserealizarRespuesta(apiResponse.getRespuesta(), new PersonaModel());
-            }
-            return new PersonaModel();
-        }catch (Exception e){
-            throw  new GatewayException("Error en el microservicio", e);
-        }
-    }
-
-    private PersonaModel fallBackObtenerDatosPersonaFeign(@PathVariable("idPersona") String idPersona, Throwable throwable){
-        PersonaModel personaModel = new PersonaModel();
-        personaModel.setPersona(idPersona);
-        personaModel.setNombres("-");
-        personaModel.setApellidoMaterno("-");
-        personaModel.setApellidoPaterno("-");
-        return personaModel;
+    private PersonaModel obtenerDatosPersonaFeign(String idPersona) {
+        ApiResponse<Object> apiResponse = personaFeignClient.obtenerPorId(idPersona).getBody();
+        if (!apiResponse.hayError())
+            return deserealizarRespuesta(apiResponse.getRespuesta(), new PersonaModel());
+        return new PersonaModel();
     }
 
 
-    private PersonaModel deserealizarRespuesta(Object respuestaApiResponse, PersonaModel p)  {
+    private PersonaModel deserealizarRespuesta(Object respuestaApiResponse, PersonaModel p) {
         // Crear un objeto ObjectMapper para deserializar la respuesta
         ObjectMapper mapper = new ObjectMapper();
-       return mapper.convertValue(respuestaApiResponse,p.getClass());
+        return mapper.convertValue(respuestaApiResponse, p.getClass());
     }
 
 
-    public ResponseEntity<ApiResponse> guardar(RegistrarPersonalOficinaDTO dto, HttpServletRequest request) {
+    public ResponseEntity<ApiResponse<Object>> guardar(RegistrarPersonalOficinaDTO dto, HttpServletRequest request) {
         Personal personal = personalMapper.toEntity(dto.getRegistrarPersonalDTO());
         personal = personalRepository.save(personal);
         if (personal.getPersonal() == null) {
@@ -154,7 +136,7 @@ public class PersonalOficinaService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<ApiResponse> listarPersonalAsignadoPorId(String codigo) {
+    public ResponseEntity<ApiResponse<Object>> listarPersonalAsignadoPorId(String codigo) {
         List<PersonalOficina> personalOficinas = personalOficinaRepository.findByCodigoPersonal(codigo);
         List<PersonalAsignadoDTO> listado = personalOficinas.stream().map(personalOficinaMapper::toDto).collect(Collectors.toList());
         if (personalOficinas.isEmpty()) return responseBuilder.respuestaSinResultado(null);

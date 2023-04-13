@@ -31,6 +31,7 @@ public class PersonaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse> obtenerPersona(@PathVariable("id") String codigo){
+        logger.info("obtenerPersona para id" + codigo);
        return personaService.obtenerUsuarioPorId(codigo);
 
     }

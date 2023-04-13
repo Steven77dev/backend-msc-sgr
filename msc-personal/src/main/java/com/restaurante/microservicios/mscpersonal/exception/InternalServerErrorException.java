@@ -1,22 +1,18 @@
 package com.restaurante.microservicios.mscpersonal.exception;
 
-public class InternalServerErrorException extends RuntimeException 
-{
-	
-	private static final long serialVersionUID = -6374323756951607995L;
+public class InternalServerErrorException extends RuntimeException {
 
-	public InternalServerErrorException() 
-	{
-		this("Internal Server Error was happened!");
-	}
+    private static final long serialVersionUID = -6374323756951607995L;
 
-	public InternalServerErrorException(String message) 
-	{
-		this(message, null);
-	}
+    public InternalServerErrorException() {
+        this("Internal Server Error was happened!");
+    }
 
-	public InternalServerErrorException(String message, Throwable cause) 
-	{
-		super(message, cause);
-	}
+    public InternalServerErrorException(String message) {
+        this(message, null);
+    }
+
+    public InternalServerErrorException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

@@ -95,7 +95,7 @@ public abstract class UtilDate {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(fechaInicio);
         calendar.add(Calendar.MONTH, cantidadMeses);
-        return  new Date(calendar.getTimeInMillis());
+        return new Date(calendar.getTimeInMillis());
     }
 
     public static Date restarDias(Date fechaFin, Long cantidadDias) {
@@ -141,7 +141,7 @@ public abstract class UtilDate {
             Date desde = new SimpleDateFormat(formato).parse(fechaDesde);
             Date hasta = new SimpleDateFormat(formato).parse(fechaHasta);
             if (fechaTest != null && desde != null && hasta != null) {
-                esValido = (fechaTest.equals(desde) || fechaTest.after(desde))  && (fechaTest.equals(hasta) || fechaTest.before(hasta));
+                esValido = (fechaTest.equals(desde) || fechaTest.after(desde)) && (fechaTest.equals(hasta) || fechaTest.before(hasta));
             }
         } catch (ParseException e) {
             return false;
@@ -184,19 +184,19 @@ public abstract class UtilDate {
                 LocalDateTime.now().getMinute();
     }
 
-    public static String obtenerStringDiaMesAnio(Date fecha){
+    public static String obtenerStringDiaMesAnio(Date fecha) {
         return ddMMyyyy.format(fecha);
     }
 
-    public static String obtenerStringDiaMesAnioHHmmss(Date fecha){
+    public static String obtenerStringDiaMesAnioHHmmss(Date fecha) {
         return ddMMyyyy_HHmmss.format(fecha);
     }
 
-    public static String obtenerStringHoraMinSegundo(Date fecha){
+    public static String obtenerStringHoraMinSegundo(Date fecha) {
         return HHmmss.format(fecha);
     }
 
-    public static String obtenerStringHoraMinuto(Date fecha){
+    public static String obtenerStringHoraMinuto(Date fecha) {
         return HHmm.format(fecha);
     }
 

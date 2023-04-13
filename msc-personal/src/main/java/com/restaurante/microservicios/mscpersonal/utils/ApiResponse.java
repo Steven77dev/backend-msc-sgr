@@ -1,16 +1,14 @@
 package com.restaurante.microservicios.mscpersonal.utils;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Collections;
 import java.util.Map;
 
-@JsonPropertyOrder({ "headers", "codigo", "mensaje","totalPaginas","totalRegistros", "respuesta", "otrosParams" })
+@JsonPropertyOrder({"headers", "codigo", "mensaje", "totalPaginas", "totalRegistros", "respuesta", "otrosParams"})
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponse<T> {
@@ -27,13 +25,13 @@ public class ApiResponse<T> {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final Map<String, Object> otrosParams;
 
-    private ApiResponse(ApiResponseBuilder builder) {
+    private ApiResponse(ApiResponseBuilder<T> builder) {
         this.headers = builder.headers;
         this.codigo = builder.codigo;
         this.mensaje = builder.mensaje;
         this.totalPaginas = builder.totalPaginas;
         this.totalRegistros = builder.totalRegistros;
-        this.respuesta = (T) builder.respuesta;
+        this.respuesta = builder.respuesta;
         this.otrosParams = builder.otrosParams;
     }
 
@@ -42,8 +40,8 @@ public class ApiResponse<T> {
                        @JsonProperty("codigo") int codigo,
                        @JsonProperty("mensaje") String mensaje,
                        @JsonProperty("totalRegistros") @JsonInclude(JsonInclude.Include.NON_DEFAULT) int totalRegistros,
-                       @JsonProperty("totalPaginas") @JsonInclude(JsonInclude.Include.NON_DEFAULT)  int totalPaginas,
-                       @JsonProperty("respuesta")@JsonInclude(JsonInclude.Include.NON_NULL)  T respuesta,
+                       @JsonProperty("totalPaginas") @JsonInclude(JsonInclude.Include.NON_DEFAULT) int totalPaginas,
+                       @JsonProperty("respuesta") @JsonInclude(JsonInclude.Include.NON_NULL) T respuesta,
                        @JsonProperty("otrosParams") @JsonInclude(JsonInclude.Include.NON_NULL) Map<String, Object> otrosParams) {
         this.headers = headers;
         this.codigo = codigo;
@@ -59,8 +57,8 @@ public class ApiResponse<T> {
         private HttpHeaders headers = new HttpHeaders();
         private final int codigo;
         private final String mensaje;
-        private  int totalRegistros;
-        private  int totalPaginas;
+        private int totalRegistros;
+        private int totalPaginas;
         private T respuesta;
         private Map<String, Object> otrosParams = Collections.emptyMap();
 
@@ -69,7 +67,6 @@ public class ApiResponse<T> {
             this.codigo = httpStatusCode;
             this.mensaje = message;
         }
-
 
 
         public ApiResponseBuilder<T> withHttpHeader(HttpHeaders httpHeader) {
@@ -93,10 +90,14 @@ public class ApiResponse<T> {
             return this;
         }
 
-        public ResponseEntity<ApiResponse> build() {
+        public ResponseEntity<ApiResponse<T>> build() {
             ApiResponse<T> apiResponse = new ApiResponse<>(this);
             return ResponseEntity.status(apiResponse.getCodigo()).headers(apiResponse.getHeaders())
                     .body(apiResponse);
         }
+    }
+
+    public boolean hayError() {
+        return codigo < 200 || codigo > 300;
     }
 }

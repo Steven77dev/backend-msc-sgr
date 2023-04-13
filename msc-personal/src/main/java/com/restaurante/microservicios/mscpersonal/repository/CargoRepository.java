@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CargoRepository extends JpaRepository<Cargo,Long> {
+public interface CargoRepository extends JpaRepository<Cargo, Long> {
     @Query(value = "SELECT MAX(CARGO) FROM CARGO", nativeQuery = true)
     Long findMaxId();
 }

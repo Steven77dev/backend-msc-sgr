@@ -19,28 +19,28 @@ public class CargoController {
 
     private CargoService cargoService;
 
-    public CargoController(CargoService cargoService){
-        this.cargoService=cargoService;
+    public CargoController(CargoService cargoService) {
+        this.cargoService = cargoService;
     }
 
 
     @GetMapping("/listado")
     @Operation(description = "Listado sin parametros", summary = "Recurso que devuelve un listado")
-    public ResponseEntity<ApiResponse> listar(){
-       return cargoService.listado();
+    public ResponseEntity<ApiResponse<Object>> listar() {
+        return cargoService.listado();
 
     }
 
     @GetMapping("/{id}")
     @Operation(description = "Obtener cargo por id", summary = "Recurso que devuelve un registro")
-    public ResponseEntity<ApiResponse> obtener(@PathVariable("id") Long codigo){
-       return cargoService.obtenerPorId(codigo);
+    public ResponseEntity<ApiResponse<Object>> obtener(@PathVariable("id") Long codigo) {
+        return cargoService.obtenerPorId(codigo);
 
     }
 
     @PostMapping("/guardar")
     @Operation(description = "Registro / actualización de cargo", summary = "Recurso que graba o actualiza el cargo")
-    public ResponseEntity<ApiResponse> guardarPersonal(@RequestBody Cargo objeto){
+    public ResponseEntity<ApiResponse<Object>> guardarPersonal(@RequestBody Cargo objeto) {
         return cargoService.guardar(objeto);
 
     }

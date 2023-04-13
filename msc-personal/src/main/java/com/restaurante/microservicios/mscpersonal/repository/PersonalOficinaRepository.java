@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PersonalOficinaRepository extends JpaRepository<PersonalOficina, String> {
-    Page<PersonalOficina> findPersonalOficinaBy( Pageable pageable);
+    Page<PersonalOficina> findPersonalOficinaBy(Pageable pageable);
+
     List<PersonalOficina> findByCodigoPersonal(String personal);
 }

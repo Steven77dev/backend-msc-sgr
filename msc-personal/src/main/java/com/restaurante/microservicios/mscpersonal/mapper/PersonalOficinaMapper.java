@@ -15,7 +15,7 @@ public interface PersonalOficinaMapper {
             @Mapping(source = "personal.personal", target = "codigoPersonal"),
             @Mapping(source = "entidad.entidad", target = "codigoEntidad"),
             @Mapping(source = "personal.persona.persona", target = "codigoPersona"),
-            @Mapping ( target = "nombres", expression = "java(personalOficina.getPersonal().getPersona().getNombres() + \" \" + personalOficina.getPersonal().getPersona().getApellidoPaterno()+ \" \" + personalOficina.getPersonal().getPersona().getApellidoMaterno())"),
+            @Mapping(target = "nombres", expression = "java(personalOficina.getPersonal().getPersona().getNombres() + \" \" + personalOficina.getPersonal().getPersona().getApellidoPaterno()+ \" \" + personalOficina.getPersonal().getPersona().getApellidoMaterno())"),
             @Mapping(source = "entidad.descripcion", target = "desEntidad"),
             @Mapping(source = "oficina.descripcion", target = "desOficina"),
             @Mapping(source = "cargo.descripcion", target = "desCargo"),
@@ -42,7 +42,7 @@ public interface PersonalOficinaMapper {
     @Mappings({
             @Mapping(source = "personal.personal", target = "codigoPersonal"),
             @Mapping(source = "entidad.entidad", target = "codigoEntidad"),
-           @Mapping(source = "personal.persona", target = "codigoPersona"),
+            @Mapping(source = "personal.persona", target = "codigoPersona"),
             @Mapping(source = "entidad.descripcion", target = "desEntidad"),
             @Mapping(source = "oficina.descripcion", target = "desOficina"),
             @Mapping(source = "cargo.descripcion", target = "desCargo"),
@@ -53,7 +53,6 @@ public interface PersonalOficinaMapper {
 
     })
     PersonalAsignadoDTO toDto(PersonalOficinav2 personalOficina);
-
 
 
 }

@@ -24,5 +24,4 @@ public class PersonalAsignadoDTO {
     private int codigoEstado;
 
 
-
 }

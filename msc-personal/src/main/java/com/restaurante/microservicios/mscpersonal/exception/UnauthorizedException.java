@@ -1,23 +1,19 @@
 package com.restaurante.microservicios.mscpersonal.exception;
 
-public class UnauthorizedException extends RuntimeException 
-{
-	
-	private static final long serialVersionUID = 7243449882242228019L;
+public class UnauthorizedException extends RuntimeException {
 
-	public UnauthorizedException() 
-	{
-		this("Unauthorized!");
-	}
+    private static final long serialVersionUID = 7243449882242228019L;
 
-	public UnauthorizedException(String message) 
-	{
-		this(message, null);
-	}
+    public UnauthorizedException() {
+        this("Unauthorized!");
+    }
 
-	public UnauthorizedException(String message, Throwable cause) 
-	{
-		super(message, cause);
-	}
-	
+    public UnauthorizedException(String message) {
+        this(message, null);
+    }
+
+    public UnauthorizedException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

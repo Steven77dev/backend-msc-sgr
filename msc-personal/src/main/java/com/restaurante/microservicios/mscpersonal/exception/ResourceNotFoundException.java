@@ -1,23 +1,19 @@
 package com.restaurante.microservicios.mscpersonal.exception;
 
-public class ResourceNotFoundException extends RuntimeException 
-{
-	
-	private static final long serialVersionUID = 449971587231274127L;
+public class ResourceNotFoundException extends RuntimeException {
 
-	public ResourceNotFoundException() 
-	{
-		this("Resource not found!");
-	}
+    private static final long serialVersionUID = 449971587231274127L;
 
-	public ResourceNotFoundException(String message) 
-	{
-		this(message, null);
-	}
+    public ResourceNotFoundException() {
+        this("Resource not found!");
+    }
 
-	public ResourceNotFoundException(String message, Throwable cause) 
-	{
-		super(message, cause);
-	}
-	
+    public ResourceNotFoundException(String message) {
+        this(message, null);
+    }
+
+    public ResourceNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

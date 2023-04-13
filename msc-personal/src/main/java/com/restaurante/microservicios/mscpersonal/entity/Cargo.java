@@ -1,7 +1,6 @@
 package com.restaurante.microservicios.mscpersonal.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +29,7 @@ public class Cargo implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creacionFecha;
     @JsonIgnore
-    @Column(name = "CONTROL_SESION",  length = 30 )
+    @Column(name = "CONTROL_SESION", length = 30)
     private String controlSesion;
 
     @Column(name = "CONTROL_FECHA")
