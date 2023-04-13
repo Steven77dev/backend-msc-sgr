@@ -1,4 +1,4 @@
-package com.restaurante.microservicios.mscpersonal.utils;
+package com.restaurante.microservicios.common.response;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
@@ -69,23 +69,23 @@ public class ApiResponse<T> {
         }
 
 
-        public ApiResponseBuilder<T> withHttpHeader(HttpHeaders httpHeader) {
+        public ApiResponseBuilder withHttpHeader(HttpHeaders httpHeader) {
             this.headers = httpHeader;
             return this;
         }
 
-        public ApiResponseBuilder<T> withData(T respuesta) {
+        public ApiResponseBuilder withData(T respuesta) {
             this.respuesta = respuesta;
             return this;
         }
 
-        public ApiResponseBuilder<T> withCount(int totalPaginas, int totalRegistros) {
+        public ApiResponseBuilder withCount(int totalPaginas, int totalRegistros) {
             this.totalPaginas = totalPaginas;
             this.totalRegistros = totalRegistros;
             return this;
         }
 
-        public ApiResponseBuilder<T> withOtherParams(Map<String, Object> otherParams) {
+        public ApiResponseBuilder withOtherParams(Map<String, Object> otherParams) {
             this.otrosParams = otherParams;
             return this;
         }

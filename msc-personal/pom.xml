@@ -144,6 +144,17 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>com.restaurante.microservicios</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.restaurante.microservicios</groupId>
+			<artifactId>common</artifactId>
+			<version><![CDATA[1.0 -Dpackaging=jar]]></version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

@@ -1,6 +1,7 @@
-package com.restaurante.microservicios.mscpersonal.utils;
+package com.restaurante.microservicios.common.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.restaurante.microservicios.common.utils.Constante;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -85,7 +86,6 @@ public class ApiResponseBuilder<T> {
         return new ApiResponse.ApiResponseBuilder<T>(HttpStatus.NOT_FOUND.value(), Constante.MENSAJE_SIN_RESULTADO)
                 .withData(data).build();
     }
-
 
     public ResponseEntity<ApiResponse<T>> exito(T data, Page<?> pageable) {
         return new ApiResponse.ApiResponseBuilder<T>(HttpStatus.OK.value(), Constante.MENSAJE_EXITO)

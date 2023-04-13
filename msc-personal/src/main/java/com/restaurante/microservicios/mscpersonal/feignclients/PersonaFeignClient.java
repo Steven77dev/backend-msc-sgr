@@ -1,7 +1,7 @@
 package com.restaurante.microservicios.mscpersonal.feignclients;
 
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponseBuilder;
+import com.restaurante.microservicios.common.response.ApiResponse;
+import com.restaurante.microservicios.common.response.ApiResponseBuilder;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +13,9 @@ public interface PersonaFeignClient {
 
     @CircuitBreaker(name = "persona-cb", fallbackMethod = "fallbackObtenerDatosPersona")
     @GetMapping("/persona/{id}")
-    ResponseEntity<ApiResponse> obtenerPorId(@PathVariable("id") String codigo);
+    ResponseEntity<ApiResponse<Object>> obtenerPorId(@PathVariable("id") String codigo);
 
-    default ResponseEntity<ApiResponse> fallbackObtenerDatosPersona(String codigo, Throwable throwable) {
-        return new ApiResponseBuilder().respuestaConErrorMicroservicio(null);
+    default ResponseEntity<ApiResponse<Object>> fallbackObtenerDatosPersona(String codigo, Throwable throwable) {
+        return new ApiResponseBuilder<>().respuestaConErrorMicroservicio(null);
     }
 }

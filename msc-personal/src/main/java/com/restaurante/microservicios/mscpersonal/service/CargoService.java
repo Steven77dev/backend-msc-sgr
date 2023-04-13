@@ -1,9 +1,10 @@
 package com.restaurante.microservicios.mscpersonal.service;
 
+import com.restaurante.microservicios.common.response.ApiResponse;
+import com.restaurante.microservicios.common.response.ApiResponseBuilder;
 import com.restaurante.microservicios.mscpersonal.entity.Cargo;
 import com.restaurante.microservicios.mscpersonal.repository.CargoRepository;
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponseBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +17,12 @@ import java.util.Optional;
 public class CargoService {
 
     private CargoRepository cargoRepository;
-    private final ApiResponseBuilder<Object> responseBuilder;
+    @Autowired
+    private ApiResponseBuilder responseBuilder;
 
 
-    public CargoService(CargoRepository cargoRepository, ApiResponseBuilder<Object> responseBuilder) {
+    public CargoService(CargoRepository cargoRepository) {
         this.cargoRepository = cargoRepository;
-        this.responseBuilder = responseBuilder;
     }
 
     @Transactional(readOnly = true)

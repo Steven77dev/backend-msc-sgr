@@ -1,6 +1,8 @@
 package com.restaurante.microservicios.mscpersonal.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.restaurante.microservicios.common.response.ApiResponse;
+import com.restaurante.microservicios.common.response.ApiResponseBuilder;
 import com.restaurante.microservicios.mscpersonal.dto.PersonalAsignadoDTO;
 import com.restaurante.microservicios.mscpersonal.dto.RegistrarPersonalOficinaDTO;
 import com.restaurante.microservicios.mscpersonal.entity.Persona;
@@ -14,8 +16,6 @@ import com.restaurante.microservicios.mscpersonal.repository.PersonalOficinaRepo
 import com.restaurante.microservicios.mscpersonal.repository.PersonalOficinaRepositoryv2;
 import com.restaurante.microservicios.mscpersonal.repository.PersonalRepository;
 import com.restaurante.microservicios.mscpersonal.service.models.PersonaModel;
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponseBuilder;
 import com.restaurante.microservicios.mscpersonal.utils.Constante;
 import com.restaurante.microservicios.mscpersonal.utils.UtilRequest;
 import org.slf4j.Logger;
@@ -35,8 +35,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class PersonalOficinaService {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private PersonalOficinaRepository personalOficinaRepository;
     @Autowired
     private PersonalOficinaRepositoryv2 personalOficinaRepositoryv2;

@@ -1,8 +1,8 @@
 package com.restaurante.microservicios.mscpersonal.controller;
 
+import com.restaurante.microservicios.common.response.ApiResponse;
 import com.restaurante.microservicios.mscpersonal.entity.Cargo;
 import com.restaurante.microservicios.mscpersonal.service.CargoService;
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;

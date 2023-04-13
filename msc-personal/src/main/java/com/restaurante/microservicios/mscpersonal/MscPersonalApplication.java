@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.restaurante.microservicios.mscpersonal", "com.restaurante.microservicios.mscpersonal.mapper"})
+@ComponentScan(basePackages = {"com.restaurante.microservicios.mscpersonal","com.restaurante.microservicios.common", "com.restaurante.microservicios.mscpersonal.mapper"})
 @EnableFeignClients
 @EnableEurekaClient
 public class MscPersonalApplication {

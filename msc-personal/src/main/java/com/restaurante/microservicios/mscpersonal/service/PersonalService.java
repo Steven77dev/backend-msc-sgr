@@ -1,9 +1,9 @@
 package com.restaurante.microservicios.mscpersonal.service;
 
+import com.restaurante.microservicios.common.response.ApiResponse;
+import com.restaurante.microservicios.common.response.ApiResponseBuilder;
 import com.restaurante.microservicios.mscpersonal.entity.Personal;
 import com.restaurante.microservicios.mscpersonal.repository.PersonalRepository;
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponse;
-import com.restaurante.microservicios.mscpersonal.utils.ApiResponseBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ public class PersonalService {
     private PersonalRepository personalRepository;
     private final ApiResponseBuilder responseBuilder;
 
-    public PersonalService(PersonalRepository personalRepository, ApiResponseBuilder responseBuilder) {
+    public PersonalService(PersonalRepository personalRepository, ApiResponseBuilder<Object> responseBuilder) {
         this.personalRepository = personalRepository;
         this.responseBuilder = responseBuilder;
     }

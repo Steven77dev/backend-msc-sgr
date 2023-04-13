@@ -1,4 +1,4 @@
-package com.restaurante.microservicios.mscpersonal.exception;
+package com.restaurante.microservicios.common.exception;
 
 public class UnauthorizedException extends RuntimeException {
 

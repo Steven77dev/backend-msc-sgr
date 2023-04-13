@@ -1,4 +1,4 @@
-package com.microservicios.msccommon.dto;
+package com.restaurante.microservicios.common.dto;
 
 import lombok.Getter;
 import lombok.Setter;

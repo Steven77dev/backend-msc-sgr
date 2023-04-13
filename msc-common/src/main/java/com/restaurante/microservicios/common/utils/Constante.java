@@ -1,4 +1,4 @@
-package com.microservicios.msccommon.utils;
+package com.restaurante.microservicios.common.utils;
 
 public class Constante {
 
