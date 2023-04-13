@@ -30,7 +30,7 @@ public class ExceptionHelper {
     @ExceptionHandler(value = {ConnectException.class})
     public ResponseEntity<ApiResponse<String>> handleConnectException(ConnectException ex) {
         logger.error("ConnectException: {}", ex.getMessage());
-        ResponseEntity apiResponse = responseBuilder.errorResponse(HttpStatus.SERVICE_UNAVAILABLE.value(), "Se presentó un error al conectar con el microservicio");
+        ResponseEntity apiResponse = responseBuilder.errorResponse(HttpStatus.SERVICE_UNAVAILABLE.value(), "Se presentó un error al conectarse.");
         ex.printStackTrace();
         return apiResponse;
     }

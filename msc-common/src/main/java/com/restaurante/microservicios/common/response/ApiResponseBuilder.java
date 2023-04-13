@@ -78,7 +78,7 @@ public class ApiResponseBuilder<T> {
     }
 
     public ResponseEntity<ApiResponse<T>> respuestaConErrorMicroservicio(T data) {
-        return new ApiResponse.ApiResponseBuilder<T>(HttpStatus.SERVICE_UNAVAILABLE.value(), "Se presentó un problema al comunicarse con el microservicio.")
+        return new ApiResponse.ApiResponseBuilder<T>(HttpStatus.SERVICE_UNAVAILABLE.value(), Constante.MENSAJE_ERROR_MICROSERVICIO)
                 .withData(data).build();
     }
 
