@@ -1,4 +1,4 @@
-package com.restaurante.microservicios.mscseguridad.utils;
+package com.restaurante.microservicios.common.utils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public abstract class UtilDate {
-    static SimpleDateFormat ddMMyyyy = new SimpleDateFormat("dd/MM/yyyy");
-    static SimpleDateFormat ddMMyyyy_HHmmss = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    static final SimpleDateFormat ddMMyyyy = new SimpleDateFormat("dd/MM/yyyy");
+    static final SimpleDateFormat ddMMyyyy_HHmmss = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     static final SimpleDateFormat HHmmss = new SimpleDateFormat("HH:mm:ss");
     static final SimpleDateFormat HHmm = new SimpleDateFormat("HH:mm");
 

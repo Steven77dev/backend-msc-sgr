@@ -18,7 +18,7 @@ import java.util.Date;
 public class Usuario {
     @Id
     @Column(name = "USUARIO", nullable = false, length = 30)
-    private String usuario;
+    private String codigo;
     @Column(name = "PERSONA", nullable = false, length = 20)
     private String persona;
     @Column(name = "CLAVE", nullable = false, length = 100)

@@ -22,14 +22,11 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
-
-    //private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private UsuarioService usuarioService;
 
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
-
 
     @Operation(description = "Iniciar sesión", summary = "Se pasa el usuario y contraseña para loguearse",
     responses = {
@@ -40,7 +37,6 @@ public class UsuarioController {
     })
     @PostMapping("/iniciarSesion")
     public ResponseEntity<Response<Object>> iniciarSesion(
-            /*@RequestParam(value = "", required = true) @ApiIgnore @RequestHeader(value = "") Map<String,String> headers,*/
             @Valid @RequestBody() UsuarioRequest usuarioRequest, HttpServletRequest request) {
         return usuarioService.iniciarSesion(usuarioRequest, request);
 

@@ -1,4 +1,4 @@
-package com.restaurante.microservicios.mscseguridad.utils;
+package com.restaurante.microservicios.common.utils;
 
 import lombok.experimental.UtilityClass;
 import org.springframework.web.context.request.RequestContextHolder;

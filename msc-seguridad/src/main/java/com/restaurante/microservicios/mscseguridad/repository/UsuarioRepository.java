@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
-
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,String> {
 

@@ -69,23 +69,23 @@ public class Response<T> {
         }
 
 
-        public ApiResponseBuilder withHttpHeader(HttpHeaders httpHeader) {
+        public ApiResponseBuilder<T> withHttpHeader(HttpHeaders httpHeader) {
             this.headers = httpHeader;
             return this;
         }
 
-        public ApiResponseBuilder withData(T respuesta) {
+        public ApiResponseBuilder<T> withData(T respuesta) {
             this.respuesta = respuesta;
             return this;
         }
 
-        public ApiResponseBuilder withCount(int totalPaginas, int totalRegistros) {
+        public ApiResponseBuilder<T> withCount(int totalPaginas, int totalRegistros) {
             this.totalPaginas = totalPaginas;
             this.totalRegistros = totalRegistros;
             return this;
         }
 
-        public ApiResponseBuilder withOtherParams(Map<String, Object> otherParams) {
+        public ApiResponseBuilder<T> withOtherParams(Map<String, Object> otherParams) {
             this.otrosParams = otherParams;
             return this;
         }
