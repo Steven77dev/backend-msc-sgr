@@ -1,6 +1,6 @@
 package com.restaurante.microservicios.common.exception;
 
-import com.restaurante.microservicios.common.response.ApiResponse;
+import com.restaurante.microservicios.common.response.Response;
 import com.restaurante.microservicios.common.response.ApiResponseBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,11 +8,15 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.io.IOException;
 import java.net.ConnectException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @ControllerAdvice
@@ -28,7 +32,7 @@ public class ExceptionHelper {
     }
 
     @ExceptionHandler(value = {ConnectException.class})
-    public ResponseEntity<ApiResponse<String>> handleConnectException(ConnectException ex) {
+    public ResponseEntity<Response<String>> handleConnectException(ConnectException ex) {
         logger.error("ConnectException: {}", ex.getMessage());
         ResponseEntity apiResponse = responseBuilder.errorResponse(HttpStatus.SERVICE_UNAVAILABLE.value(), "Se presentó un error al conectarse.");
         ex.printStackTrace();
@@ -36,7 +40,7 @@ public class ExceptionHelper {
     }
 
     @ExceptionHandler(value = {GatewayException.class})
-    public ResponseEntity<ApiResponse<String>> handleGatewayException(GatewayException ex) {
+    public ResponseEntity<Response<String>> handleGatewayException(GatewayException ex) {
         logger.error("GatewayException: {}", ex.getMessage());
         ResponseEntity apiResponse = responseBuilder.errorResponse(HttpStatus.SERVICE_UNAVAILABLE.value(), "Se presentó un error al conectar con el microservicio desde gateway");
         ex.printStackTrace();
@@ -45,7 +49,7 @@ public class ExceptionHelper {
 
 
     @ExceptionHandler(value = {IOException.class})
-    public ResponseEntity<ApiResponse<String>> handlDeserealizarException(IOException ex) {
+    public ResponseEntity<Response<String>> handlDeserealizarException(IOException ex) {
         logger.error("DeserealizarException: {}", ex.getMessage());
         ResponseEntity apiResponse = responseBuilder.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Se presentó un problema al deserealizar la respuesta", null);
 
@@ -53,7 +57,7 @@ public class ExceptionHelper {
     }
 
     @ExceptionHandler(value = {ResourceNotFoundException.class})
-    public ResponseEntity<ApiResponse<String>> handleResourceNotFoundException(ResourceNotFoundException ex) {
+    public ResponseEntity<Response<String>> handleResourceNotFoundException(ResourceNotFoundException ex) {
         logger.error("ResourceNotFoundException {}", ex.getMessage());
         ResponseEntity apiResponse = responseBuilder.buildResponse(HttpStatus.NOT_FOUND.value(), "Se presentó un error con el recurso", null);
         ex.printStackTrace();
@@ -62,7 +66,7 @@ public class ExceptionHelper {
 
 
     @ExceptionHandler(value = {PersistenciaException.class})
-    public ResponseEntity<ApiResponse<String>> handlerSQLSyntaxisError(PersistenciaException ex) {
+    public ResponseEntity<Response<String>> handlerSQLSyntaxisError(PersistenciaException ex) {
         logger.error("PersistenciaException {}", ex.getMessage());
         ResponseEntity apiResponse = responseBuilder.buildResponse(HttpStatus.BAD_REQUEST.value(), "Se presentó un error en la base de datos", null);
         ex.printStackTrace();
@@ -70,16 +74,26 @@ public class ExceptionHelper {
     }
 
     @ExceptionHandler(value = {NumberFormatException.class})
-    public ResponseEntity<ApiResponse<String>> handlerNumberFormatException(NumberFormatException ex) {
+    public ResponseEntity<Response<String>> handlerNumberFormatException(NumberFormatException ex) {
         logger.error("NumberFormatException {}", ex.getMessage());
         ResponseEntity apiResponse = responseBuilder.buildResponse(HttpStatus.BAD_REQUEST.value(), "Error en la conversión de dato númerico", null);
         ex.printStackTrace();
         return apiResponse;
     }
-
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleValidationException(MethodArgumentNotValidException ex) {
+        List<String> errors = new ArrayList<>();
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            errors.add(error.getDefaultMessage());
+        }
+        logger.error("MethodArgumentNotValidException {}", ex.getMessage());
+        ResponseEntity apiResponse =responseBuilder.buildResponse(HttpStatus.BAD_REQUEST.value(), "Se presentó un error en las validaciones",errors); // new ErrorResponse("Validation failed", errors);
+        ex.printStackTrace();
+        return apiResponse;
+    }
 
     @ExceptionHandler(value = {Exception.class})
-    public ResponseEntity<ApiResponse<String>> handleException(Exception ex) {
+    public ResponseEntity<Response<String>> handleException(Exception ex) {
         logger.error("Exception: {}", ex.getMessage());
         ResponseEntity apiResponse = responseBuilder.errorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Se presentó un error de excepción");
         ex.printStackTrace();

@@ -11,7 +11,7 @@ import java.util.Map;
 @JsonPropertyOrder({"headers", "codigo", "mensaje", "totalPaginas", "totalRegistros", "respuesta", "otrosParams"})
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApiResponse<T> {
+public class Response<T> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final HttpHeaders headers;
     private final int codigo;
@@ -25,7 +25,7 @@ public class ApiResponse<T> {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final Map<String, Object> otrosParams;
 
-    private ApiResponse(ApiResponseBuilder<T> builder) {
+    private Response(ApiResponseBuilder<T> builder) {
         this.headers = builder.headers;
         this.codigo = builder.codigo;
         this.mensaje = builder.mensaje;
@@ -36,13 +36,13 @@ public class ApiResponse<T> {
     }
 
     @JsonCreator
-    public ApiResponse(@JsonProperty("headers") @JsonInclude(JsonInclude.Include.NON_NULL) HttpHeaders headers,
-                       @JsonProperty("codigo") int codigo,
-                       @JsonProperty("mensaje") String mensaje,
-                       @JsonProperty("totalRegistros") @JsonInclude(JsonInclude.Include.NON_DEFAULT) int totalRegistros,
-                       @JsonProperty("totalPaginas") @JsonInclude(JsonInclude.Include.NON_DEFAULT) int totalPaginas,
-                       @JsonProperty("respuesta") @JsonInclude(JsonInclude.Include.NON_NULL) T respuesta,
-                       @JsonProperty("otrosParams") @JsonInclude(JsonInclude.Include.NON_NULL) Map<String, Object> otrosParams) {
+    public Response(@JsonProperty("headers") @JsonInclude(JsonInclude.Include.NON_NULL) HttpHeaders headers,
+                    @JsonProperty("codigo") int codigo,
+                    @JsonProperty("mensaje") String mensaje,
+                    @JsonProperty("totalRegistros") @JsonInclude(JsonInclude.Include.NON_DEFAULT) int totalRegistros,
+                    @JsonProperty("totalPaginas") @JsonInclude(JsonInclude.Include.NON_DEFAULT) int totalPaginas,
+                    @JsonProperty("respuesta") @JsonInclude(JsonInclude.Include.NON_NULL) T respuesta,
+                    @JsonProperty("otrosParams") @JsonInclude(JsonInclude.Include.NON_NULL) Map<String, Object> otrosParams) {
         this.headers = headers;
         this.codigo = codigo;
         this.mensaje = mensaje;
@@ -90,10 +90,10 @@ public class ApiResponse<T> {
             return this;
         }
 
-        public ResponseEntity<ApiResponse<T>> build() {
-            ApiResponse<T> apiResponse = new ApiResponse<>(this);
-            return ResponseEntity.status(apiResponse.getCodigo()).headers(apiResponse.getHeaders())
-                    .body(apiResponse);
+        public ResponseEntity<Response<T>> build() {
+            Response<T> response = new Response<>(this);
+            return ResponseEntity.status(response.getCodigo()).headers(response.getHeaders())
+                    .body(response);
         }
     }
 

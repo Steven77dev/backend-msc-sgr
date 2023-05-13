@@ -3,10 +3,7 @@ package com.restaurante.microservicios.msclogistica.controller;
 import com.restaurante.microservicios.msclogistica.entity.Area;
 import com.restaurante.microservicios.msclogistica.service.AreaService;
 import com.restaurante.microservicios.msclogistica.utils.ApiResponse;
-
-
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

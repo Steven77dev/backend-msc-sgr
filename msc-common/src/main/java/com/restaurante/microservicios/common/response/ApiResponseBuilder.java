@@ -13,91 +13,91 @@ import java.util.Map;
 
 @Component
 public class ApiResponseBuilder<T> {
-    public ResponseEntity<ApiResponse<T>> buildResponse(
+    public ResponseEntity<Response<T>> buildResponse(
             HttpHeaders httpHeader, int httpStatusCode, String message, T data, Map<String, Object> otherParams) {
-        return new ApiResponse.ApiResponseBuilder<T>(httpStatusCode, message).withHttpHeader(httpHeader)
+        return new Response.ApiResponseBuilder<T>(httpStatusCode, message).withHttpHeader(httpHeader)
                 .withData(data).withOtherParams(otherParams).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> buildResponse(
+    public ResponseEntity<Response<T>> buildResponse(
             int httpStatusCode, String message, T data, Map<String, Object> otherParams) {
-        return new ApiResponse.ApiResponseBuilder<T>(httpStatusCode, message)
+        return new Response.ApiResponseBuilder<T>(httpStatusCode, message)
                 .withData(data).withOtherParams(otherParams).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> buildResponse(
+    public ResponseEntity<Response<T>> buildResponse(
             int httpStatusCode, String message, Map<String, Object> otherParams) {
-        return new ApiResponse.ApiResponseBuilder<T>(httpStatusCode, message)
+        return new Response.ApiResponseBuilder<T>(httpStatusCode, message)
                 .withOtherParams(otherParams).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> errorResponse(
+    public ResponseEntity<Response<T>> errorResponse(
             int httpStatusCode, String message) {
-        return new ApiResponse.ApiResponseBuilder<T>(httpStatusCode, message)
+        return new Response.ApiResponseBuilder<T>(httpStatusCode, message)
                 .build();
     }
 
 
-    public ResponseEntity<ApiResponse<T>> buildResponse(
+    public ResponseEntity<Response<T>> buildResponse(
             int httpStatusCode, String message) {
-        return new ApiResponse.ApiResponseBuilder<T>(httpStatusCode, message).build();
+        return new Response.ApiResponseBuilder<T>(httpStatusCode, message).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> buildResponse(
+    public ResponseEntity<Response<T>> buildResponse(
             HttpHeaders httpHeader, int httpStatusCode, String message, T data) {
-        return new ApiResponse.ApiResponseBuilder<T>(httpStatusCode, message)
+        return new Response.ApiResponseBuilder<T>(httpStatusCode, message)
                 .withHttpHeader(httpHeader).withData(data).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> buildResponse(
+    public ResponseEntity<Response<T>> buildResponse(
             HttpHeaders httpHeader, int httpStatusCode, String message, Map<String, Object> otherParams) {
-        return new ApiResponse.ApiResponseBuilder<T>(httpStatusCode, message)
+        return new Response.ApiResponseBuilder<T>(httpStatusCode, message)
                 .withHttpHeader(httpHeader).withOtherParams(otherParams).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> buildResponse(
+    public ResponseEntity<Response<T>> buildResponse(
             HttpHeaders httpHeader, int httpStatusCode, String message) {
-        return new ApiResponse.ApiResponseBuilder<T>(httpStatusCode, message)
+        return new Response.ApiResponseBuilder<T>(httpStatusCode, message)
                 .withHttpHeader(httpHeader).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> buildResponse(
+    public ResponseEntity<Response<T>> buildResponse(
             int httpStatusCode, String message, T data) {
-        return new ApiResponse.ApiResponseBuilder<T>(httpStatusCode, message)
+        return new Response.ApiResponseBuilder<T>(httpStatusCode, message)
                 .withData(data).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> respuestaConExito(T data) {
-        return new ApiResponse.ApiResponseBuilder<T>(HttpStatus.OK.value(), Constante.MENSAJE_EXITO)
+    public ResponseEntity<Response<T>> respuestaConExito(T data) {
+        return new Response.ApiResponseBuilder<T>(HttpStatus.OK.value(), Constante.MENSAJE_EXITO)
                 .withData(data).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> respuestaConError(T data) {
-        return new ApiResponse.ApiResponseBuilder<T>(HttpStatus.BAD_REQUEST.value(), Constante.MENSAJE_ERROR)
+    public ResponseEntity<Response<T>> respuestaConError(T data) {
+        return new Response.ApiResponseBuilder<T>(HttpStatus.BAD_REQUEST.value(), Constante.MENSAJE_ERROR)
                 .withData(data).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> respuestaConErrorMicroservicio(T data) {
-        return new ApiResponse.ApiResponseBuilder<T>(HttpStatus.SERVICE_UNAVAILABLE.value(), Constante.MENSAJE_ERROR_MICROSERVICIO)
+    public ResponseEntity<Response<T>> respuestaConErrorMicroservicio(T data) {
+        return new Response.ApiResponseBuilder<T>(HttpStatus.SERVICE_UNAVAILABLE.value(), Constante.MENSAJE_ERROR_MICROSERVICIO)
                 .withData(data).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> respuestaSinResultado(T data) {
-        return new ApiResponse.ApiResponseBuilder<T>(HttpStatus.NOT_FOUND.value(), Constante.MENSAJE_SIN_RESULTADO)
+    public ResponseEntity<Response<T>> respuestaSinResultado(T data) {
+        return new Response.ApiResponseBuilder<T>(HttpStatus.NOT_FOUND.value(), Constante.MENSAJE_SIN_RESULTADO)
                 .withData(data).build();
     }
 
-    public ResponseEntity<ApiResponse<T>> exito(T data, Page<?> pageable) {
-        return new ApiResponse.ApiResponseBuilder<T>(HttpStatus.OK.value(), Constante.MENSAJE_EXITO)
+    public ResponseEntity<Response<T>> exito(T data, Page<?> pageable) {
+        return new Response.ApiResponseBuilder<T>(HttpStatus.OK.value(), Constante.MENSAJE_EXITO)
                 .withData(data).withCount(pageable.getTotalPages(), (int) pageable.getTotalElements()).build();
     }
 
-    public static ApiResponse<Object> desearializarApiResponse(String responseBody) {
+    public static Response<Object> desearializarApiResponse(String responseBody) {
         try {
             // Crear un objeto ObjectMapper para deserializar la respuesta
             ObjectMapper mapper = new ObjectMapper();
             // Deserializar la respuesta a un objeto ApiResponse
-            return mapper.readValue(responseBody, ApiResponse.class);
+            return mapper.readValue(responseBody, Response.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
