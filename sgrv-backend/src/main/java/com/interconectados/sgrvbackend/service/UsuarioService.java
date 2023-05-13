@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "msc-seguridad", url = "http://localhost:8080")
+@FeignClient(name = "msc-usuario", url = "http://localhost:8080")
 public interface UsuarioService {
 
     @PostMapping("/usuario/iniciarSesion")
