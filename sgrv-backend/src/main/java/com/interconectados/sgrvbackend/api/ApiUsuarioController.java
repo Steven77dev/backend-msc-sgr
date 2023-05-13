@@ -1,4 +1,4 @@
-package com.interconectados.sgrvbackend.api.seguridad;
+package com.interconectados.sgrvbackend.api;
 
 import com.interconectados.sgrvbackend.models.request.UsuarioRequest;
 import com.interconectados.sgrvbackend.service.UsuarioServiceImpl;
@@ -16,9 +16,9 @@ public class ApiUsuarioController {
     private final UsuarioServiceImpl usuarioService;
 
     public ApiUsuarioController(UsuarioServiceImpl usuarioService){
-
         this.usuarioService = usuarioService;
     }
+
     @PostMapping(value = "/iniciar-sesion",produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse validarSesion(@RequestBody UsuarioRequest usuarioRequest) {
         return usuarioService.validarSesion(usuarioRequest);

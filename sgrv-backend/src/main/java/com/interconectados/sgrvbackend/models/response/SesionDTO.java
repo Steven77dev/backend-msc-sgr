@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SesionDTO {
+
     @JsonProperty(value = "estado")
     @JsonSetter("ESTADO")
     private int estado;
@@ -24,10 +25,6 @@ public class SesionDTO {
     @JsonProperty(value ="sesion")
     @JsonSetter(value ="SESION")
     private String sesion;
-
-
-
-
 
     @Override
     public String toString(){

@@ -12,6 +12,7 @@ import lombok.ToString;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class UsuarioRequest {
+
     private String usuario;
     private String password;
     private String ip;

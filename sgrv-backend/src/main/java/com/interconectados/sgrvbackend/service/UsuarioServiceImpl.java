@@ -1,9 +1,7 @@
 package com.interconectados.sgrvbackend.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.interconectados.sgrvbackend.Respuesta;
+import com.interconectados.sgrvbackend.Objeto;
 import com.interconectados.sgrvbackend.models.request.UsuarioRequest;
-import com.interconectados.sgrvbackend.models.response.SesionDTO;
 import com.interconectados.sgrvbackend.utils.ApiResponse;
 import com.interconectados.sgrvbackend.utils.ConvertirApiResponse;
 import com.restaurante.microservicios.common.response.Response;
@@ -18,22 +16,18 @@ public class UsuarioServiceImpl  {
         this.usuarioService = usuarioService;
     }
 
-
     public ApiResponse validarSesion(UsuarioRequest usuarioRequest) {
+
+        if(Objeto.anyEmpty(usuarioRequest.getUsuario(), usuarioRequest.getPassword())){
+            return ApiResponse.parametrosIncorrectos();
+        }
 
         Response responseEntity=  usuarioService.validarSesion(usuarioRequest).getBody();
         if (responseEntity.hayError()) {
             return ApiResponse.error();
         } else {
-            ApiResponse respuesta = ConvertirApiResponse.convertirApiResponse(responseEntity);
+            ApiResponse respuesta = ConvertirApiResponse.exito(responseEntity);
             return respuesta;
         }
-
-    }
-
-    private SesionDTO deserealizarRespuesta(Object respuestaApiResponse, SesionDTO p) {
-        // Crear un objeto ObjectMapper para deserializar la respuesta
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.convertValue(respuestaApiResponse, p.getClass());
     }
 }

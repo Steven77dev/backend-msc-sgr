@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "msc-seguridad", url = "http://localhost:8080")
 public interface UsuarioService {
+
     @PostMapping("/usuario/iniciarSesion")
     ResponseEntity<Response<Object>> validarSesion(@RequestBody UsuarioRequest usuarioRequest);
 }
