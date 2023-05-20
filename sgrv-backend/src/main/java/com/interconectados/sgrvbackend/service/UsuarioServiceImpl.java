@@ -26,8 +26,20 @@ public class UsuarioServiceImpl  {
         if (responseEntity.hayError()) {
             return ApiResponse.error();
         } else {
-            ApiResponse respuesta = ConvertirApiResponse.exito(responseEntity);
-            return respuesta;
+            return ConvertirApiResponse.exito(responseEntity);
+        }
+    }
+
+    public ApiResponse obtenerPersonal(String usuario){
+        if(Objeto.anyEmpty(usuario)){
+            return ApiResponse.error();
+        }
+
+        Response response = usuarioService.obtenerPersonal(usuario).getBody();
+        if(response.hayError()){
+            return ApiResponse.error();
+        } else{
+            return ConvertirApiResponse.exito(response);
         }
     }
 }

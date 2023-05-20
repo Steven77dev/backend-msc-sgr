@@ -7,6 +7,7 @@ import com.restaurante.microservicios.common.utils.Serializer;
 import com.restaurante.microservicios.common.utils.UtilDate;
 import com.restaurante.microservicios.common.utils.UtilRequest;
 import com.restaurante.microservicios.mscusuario.models.request.UsuarioRequest;
+import com.restaurante.microservicios.mscusuario.models.response.PersonalUsuarioDTO;
 import com.restaurante.microservicios.mscusuario.models.response.SesionDTO;
 import com.restaurante.microservicios.mscusuario.repository.UsuarioRepository;
 import org.slf4j.Logger;
@@ -40,5 +41,11 @@ public class UsuarioService {
         return responseBuilder.respuestaConExito(sesionDTO);
     }
 
+    public ResponseEntity<Response<Object>> obtenerPersonalByUsuario(String usuario){
+        logger.info("Obteniendo datos del personal de usuario {}", usuario );
+        Map<String, Object> respuesta = usuarioRepository.obtenerPersonalUsuario(2, usuario,"","");
+        PersonalUsuarioDTO personalUsuarioDTO = objectMapper.convertValue(respuesta, PersonalUsuarioDTO.class);
+        return  responseBuilder.respuestaConExito(personalUsuarioDTO);
+    }
 
 }

@@ -10,10 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -39,6 +36,13 @@ public class UsuarioController {
     public ResponseEntity<Response<Object>> iniciarSesion(
             @Valid @RequestBody() UsuarioRequest usuarioRequest, HttpServletRequest request) {
         return usuarioService.iniciarSesion(usuarioRequest, request);
+
+    }
+
+
+    @GetMapping("/obtenerPersonal/{codigoUsuario}")
+    public ResponseEntity<Response<Object>> obtenerPersonalByUsuario(@PathVariable String codigoUsuario ){
+        return usuarioService.obtenerPersonalByUsuario(codigoUsuario);
 
     }
 }
