@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SesionDTO {
+public class SesionResponse {
     @JsonProperty(value = "estado")
     @JsonSetter("ESTADO")
     private int estado;

@@ -1,8 +1,9 @@
 package com.restaurante.microservicios.mscusuario.controller;
 
 import com.restaurante.microservicios.common.response.Response;
+import com.restaurante.microservicios.mscusuario.models.request.BusqCajaPorUsuarioRequest;
 import com.restaurante.microservicios.mscusuario.models.request.UsuarioRequest;
-import com.restaurante.microservicios.mscusuario.models.response.SesionDTO;
+import com.restaurante.microservicios.mscusuario.models.response.SesionResponse;
 import com.restaurante.microservicios.mscusuario.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -30,7 +31,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200",
                     description = "OK",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = SesionDTO.class))})
+                            schema = @Schema(implementation = SesionResponse.class))})
     })
     @PostMapping("/iniciarSesion")
     public ResponseEntity<Response<Object>> iniciarSesion(
@@ -41,8 +42,14 @@ public class UsuarioController {
 
 
     @GetMapping("/obtenerPersonal/{codigoUsuario}")
-    public ResponseEntity<Response<Object>> obtenerPersonalByUsuario(@PathVariable String codigoUsuario ){
-        return usuarioService.obtenerPersonalByUsuario(codigoUsuario);
+    public ResponseEntity<Response<Object>> obtenerPersonalPorUsuario(@PathVariable String codigoUsuario ){
+        return usuarioService.obtenerPersonalPorUsuario(codigoUsuario);
+
+    }
+
+    @PostMapping("/obtenerCaja")
+    public ResponseEntity<Response<Object>> obtenerCaja(@RequestBody BusqCajaPorUsuarioRequest request){
+        return usuarioService.obtenerCajaDefectoPorUsuario(request);
 
     }
 }

@@ -21,4 +21,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario,String> {
     Map<String, Object> obtenerPersonalUsuario(@Param("LITIPSQL") int tipoSQL,
                                                @Param("LSUSUARI") String usuario, @Param("LSPARAM1") String parametro1,
                                                @Param("LSPARAM2") String parametro2);
+
+    @Query(value = "{call SEGU.CON_USUARIO(?,?,?,?)}", nativeQuery = true)
+    Map<String, Object> obtenerCajaPorUsuario(@Param("LITIPSQL") int tipoSQL,
+                                               @Param("LSUSUARI") String usuario, @Param("LSPARAM1") String parametro1,
+                                               @Param("LSPARAM2") String parametro2);
 }

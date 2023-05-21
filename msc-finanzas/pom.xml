@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.restaurante.microservicios</groupId>
-	<artifactId>msc-ubuicacion</artifactId>
+	<artifactId>msc-finanzas</artifactId>
 	<version>0.0.1</version>
-	<name>msc-ubicacion</name>
-	<description>Microservicio de ubicación</description>
+	<name>msc-finanzas</name>
+	<description>Microservicio de finanzas</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -127,7 +127,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>com.restaurante.microservicios</groupId>
 			<artifactId>common</artifactId>
