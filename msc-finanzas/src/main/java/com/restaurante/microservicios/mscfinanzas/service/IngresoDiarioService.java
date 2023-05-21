@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restaurante.microservicios.common.response.ApiResponseBuilder;
 import com.restaurante.microservicios.common.response.Response;
 import com.restaurante.microservicios.common.utils.Serializer;
-import com.restaurante.microservicios.mscfinanzas.models.request.BusqAperturaCierreRequest;
-import com.restaurante.microservicios.mscfinanzas.models.request.BusqIngresoEgresoRequest;
-import com.restaurante.microservicios.mscfinanzas.models.request.BusqIngresoPersonalRequest;
-import com.restaurante.microservicios.mscfinanzas.models.request.CuadrarCajaRequest;
+import com.restaurante.microservicios.mscfinanzas.models.request.*;
 import com.restaurante.microservicios.mscfinanzas.models.response.AperturaCierreResponse;
 import com.restaurante.microservicios.mscfinanzas.models.response.SqlSPResponse;
 import com.restaurante.microservicios.mscfinanzas.models.response.IngresoEgresoResponse;
@@ -70,6 +67,16 @@ public class IngresoDiarioService {
     public ResponseEntity<Response<Object>> cuadrarCaja(CuadrarCajaRequest request){
         logger.info("Cuadrar caja {}", request );
         String nroRspta =ingresoDiarioRepository.cuadrarCaja(2,request.getLocal(),request.getFecEmision(),request.getEntidad(),request.getEmisor(),request.getFechaApertura(),request.getFechaCierre(),request.getIdCaja(),request.getSession());
+        SqlSPResponse codigoSPResponse = new SqlSPResponse();
+        codigoSPResponse.setCodigoRspta(nroRspta);
+        return !nroRspta.equals("501") ? responseBuilder.respuestaConError(codigoSPResponse) : responseBuilder.respuestaConExito(codigoSPResponse);
+
+    }
+
+    @Transactional
+    public ResponseEntity<Response<Object>> cerrarCaja(CerrarCajaRequest request){
+        logger.info("Cerrar caja {}", request );
+        String nroRspta =ingresoDiarioRepository.cerrarCaja(2,request.getLocal(),request.getFecEmision(),request.getEntidad(),request.getEmisor(),request.getFechaApertura(),request.getFechaCierre(), request.getObservacion(), request.getIdCaja(),request.getSession());
         SqlSPResponse codigoSPResponse = new SqlSPResponse();
         codigoSPResponse.setCodigoRspta(nroRspta);
         return !nroRspta.equals("501") ? responseBuilder.respuestaConError(codigoSPResponse) : responseBuilder.respuestaConExito(codigoSPResponse);

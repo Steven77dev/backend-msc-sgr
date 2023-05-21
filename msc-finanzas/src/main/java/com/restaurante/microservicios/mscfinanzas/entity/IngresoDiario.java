@@ -27,6 +27,24 @@ import java.util.Date;
                 @StoredProcedureParameter(name = "LSSESION", type = String.class, mode = ParameterMode.IN)
         }
 )
+
+@NamedStoredProcedureQuery(
+        name = "CerrarCaja",
+        procedureName = "FINA.SQL_CIERRE_CAJA",
+        parameters = {
+                @StoredProcedureParameter(name = "LITIPSQL", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LILOCALE", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSFECEMI", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LIENTIDA", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSEMISOR", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSFECAPE", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSFECCIE", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSOBSERV", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LINROCAJ", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LINUMRES", type = String.class, mode = ParameterMode.OUT),
+                @StoredProcedureParameter(name = "LSSESION", type = String.class, mode = ParameterMode.IN)
+        }
+)
 public class IngresoDiario {
     @Id
     @Column(name = "SERIE_ID", nullable = false, length = 10)

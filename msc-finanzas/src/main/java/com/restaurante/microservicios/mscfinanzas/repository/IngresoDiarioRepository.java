@@ -34,14 +34,16 @@ public interface IngresoDiarioRepository extends JpaRepository<IngresoDiario,Str
                                                      @Param("LSPARAM5") String param5);
 
     @Procedure(name = "CuadrarCaja", outputParameterName = "LINUMRES")
-    String cuadrarCaja(@Param("LITIPSQL") int tipoSQL,
-                       @Param("LILOCALE") int local,
-                       @Param("LSFECEMI") String fechaEmision,
-                       @Param("LIENTIDA") int entidad,
-                       @Param("LSEMISOR") String emisor,
-                       @Param("LSFECAPE") String fechaAper,
-                       @Param("LSFECCIE") String fechaCierre,
-                       @Param("LINROCAJ") int caja,
-                       //@Param("LINUMRES") String numRspta,
+    String cuadrarCaja(@Param("LITIPSQL") int tipoSQL, @Param("LILOCALE") int local,
+                       @Param("LSFECEMI") String fechaEmision, @Param("LIENTIDA") int entidad,
+                       @Param("LSEMISOR") String emisor,  @Param("LSFECAPE") String fechaAper,
+                       @Param("LSFECCIE") String fechaCierre,  @Param("LINROCAJ") int caja,
                        @Param("LSSESION") String sesion);
+
+    @Procedure(name = "CerrarCaja", outputParameterName = "LINUMRES")
+    String cerrarCaja(@Param("LITIPSQL") int tipoSQL, @Param("LILOCALE") int local,
+                       @Param("LSFECEMI") String fechaEmision, @Param("LIENTIDA") int entidad,
+                       @Param("LSEMISOR") String emisor, @Param("LSFECAPE") String fechaAper,
+                       @Param("LSFECCIE") String fechaCierre, @Param("LSOBSERV") String observacion,
+                       @Param("LINROCAJ") int caja, @Param("LSSESION") String sesion);
 }

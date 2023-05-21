@@ -1,10 +1,7 @@
 package com.restaurante.microservicios.mscfinanzas.controller;
 
 import com.restaurante.microservicios.common.response.Response;
-import com.restaurante.microservicios.mscfinanzas.models.request.BusqAperturaCierreRequest;
-import com.restaurante.microservicios.mscfinanzas.models.request.BusqIngresoEgresoRequest;
-import com.restaurante.microservicios.mscfinanzas.models.request.BusqIngresoPersonalRequest;
-import com.restaurante.microservicios.mscfinanzas.models.request.CuadrarCajaRequest;
+import com.restaurante.microservicios.mscfinanzas.models.request.*;
 import com.restaurante.microservicios.mscfinanzas.models.response.AperturaCierreResponse;
 import com.restaurante.microservicios.mscfinanzas.models.response.SqlSPResponse;
 import com.restaurante.microservicios.mscfinanzas.models.response.IngresoEgresoResponse;
@@ -82,5 +79,17 @@ public class IngresoDiarioController {
     @PostMapping("/cuadrarCaja")
     public ResponseEntity<Response<Object>> cuadrarCaja(@Valid @RequestBody CuadrarCajaRequest request){
         return ingresoDiarioService.cuadrarCaja(request);
+    }
+
+    @Operation(description = "Cerrar caja", summary = "Se realiza el cierre de caja del local en base al personal",
+            responses = {
+                    @ApiResponse(responseCode = "200",
+                            description = "OK",
+                            content = {@Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = SqlSPResponse.class))})
+            })
+    @PostMapping("/cerrarCaja")
+    public ResponseEntity<Response<Object>> cerrarCaja(@Valid @RequestBody CerrarCajaRequest request){
+        return ingresoDiarioService.cerrarCaja(request);
     }
 }
