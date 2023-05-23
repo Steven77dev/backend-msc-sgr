@@ -28,7 +28,8 @@ public class UsuarioService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final ApiResponseBuilder<Object> responseBuilder;
     private UsuarioRepository usuarioRepository;
-    private static   ObjectMapper objectMapper = Serializer.objectMapper();
+    private static ObjectMapper objectMapper = Serializer.objectMapper();
+
     public UsuarioService(UsuarioRepository usuarioRepository, ApiResponseBuilder<Object> responseBuilder){
         this.usuarioRepository = usuarioRepository;
         this.responseBuilder = responseBuilder;
