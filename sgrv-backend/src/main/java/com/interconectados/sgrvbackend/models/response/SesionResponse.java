@@ -14,16 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SesionDTO {
+public class SesionResponse {
 
     @JsonProperty(value = "estado")
-    @JsonSetter("ESTADO")
     private int estado;
     @JsonProperty(value ="descripcion")
-    @JsonSetter(value ="DESCRIPCION")
     private String descripcion;
     @JsonProperty(value ="sesion")
-    @JsonSetter(value ="SESION")
     private String sesion;
 
     @Override
