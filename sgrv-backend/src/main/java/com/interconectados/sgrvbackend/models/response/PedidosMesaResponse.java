@@ -17,17 +17,18 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListadoMesasAtencionResponse {
+public class PedidosMesaResponse {
 
-    private int codMesa;
-    private String desMesa;
-    private String seriePedido;
-    private String nroPedido;
-    private String codEstadoRegistro;
-    private String desEstadoRegistro;
-    private String mesaPrincipal;
-    private String puntoAtencion;
-    private BigDecimal montoTotal;
-    private String desCliente;
-    private String cantidad;
+    private int nro;
+    private int itemPedido;
+    private int entidad;
+    private String producto;
+    private String desProducto;
+    private BigDecimal precio;
+    private int cantidad;
+    private BigDecimal subTotal;
+    private int saldoRojo;
+    private int tipoProducto;
+    private String estaAlmacen;
+
 }

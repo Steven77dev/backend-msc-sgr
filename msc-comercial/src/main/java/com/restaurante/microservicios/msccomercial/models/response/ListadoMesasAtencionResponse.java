@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+
 @Getter
 @ToString
 @AllArgsConstructor
@@ -51,7 +53,7 @@ public class ListadoMesasAtencionResponse {
 
     @JsonProperty("montoTotal")
     @JsonSetter("MONTO_TOTAL")
-    private String montoTotal;
+    private BigDecimal montoTotal;
 
     @JsonProperty("desCliente")
     @JsonSetter("CLIENTE")

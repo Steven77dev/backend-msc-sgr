@@ -2,6 +2,7 @@ package com.restaurante.microservicios.msccomercial.controller;
 
 import com.restaurante.microservicios.common.response.Response;
 import com.restaurante.microservicios.msccomercial.models.request.BusqMesasRequest;
+import com.restaurante.microservicios.msccomercial.models.request.BusqPedidosMesaRequest;
 import com.restaurante.microservicios.msccomercial.models.response.ListadoMesasAtencionResponse;
 import com.restaurante.microservicios.msccomercial.service.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,4 +40,12 @@ public class PedidoController {
         return pedidoService.listadoMesasLocal(request);
 
     }
+
+    @PostMapping("/listarPedidosPorMesa")
+    public ResponseEntity<Response<Object>> listarPedidosPorMesa(@Valid @RequestBody BusqPedidosMesaRequest request){
+        return pedidoService.listarPedidosPorMesa(request);
+
+    }
+
+
 }

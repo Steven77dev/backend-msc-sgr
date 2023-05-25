@@ -6,7 +6,9 @@ import com.restaurante.microservicios.common.response.ApiResponseBuilder;
 import com.restaurante.microservicios.common.response.Response;
 import com.restaurante.microservicios.common.utils.Serializer;
 import com.restaurante.microservicios.msccomercial.models.request.BusqMesasRequest;
+import com.restaurante.microservicios.msccomercial.models.request.BusqPedidosMesaRequest;
 import com.restaurante.microservicios.msccomercial.models.response.ListadoMesasAtencionResponse;
+import com.restaurante.microservicios.msccomercial.models.response.PedidosMesaResponse;
 import com.restaurante.microservicios.msccomercial.repository.PedidoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +38,16 @@ public class PedidoService {
         List<Map<String, Object>> respuesta = pedidoRepository.listadoMesas(1, request.getEntidad(),request.getLocal(),request.getFecha(), request.getEstado());
         List<ListadoMesasAtencionResponse> listadoMesasAtencionResponse = objectMapper.convertValue(respuesta,new TypeReference<List<ListadoMesasAtencionResponse>>() {});
         return listadoMesasAtencionResponse.isEmpty() ? responseBuilder.respuestaSinResultado(null) : responseBuilder.respuestaConExito(listadoMesasAtencionResponse);
+
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseEntity<Response<Object>> listarPedidosPorMesa(BusqPedidosMesaRequest request){
+        logger.info("Listado de mesas disponibles u ocupadas del local {}", request );
+        List<Map<String, Object>> respuesta = pedidoRepository.listarPedidosPorMesa(1, request.getSeriePedido(), request.getNroPedido(), request.getItemPedido(), request.getEntidad(), request.getAlmacen(),"","","");
+        List<PedidosMesaResponse> pedidosMesaResponses = objectMapper.convertValue(respuesta,new TypeReference<List<PedidosMesaResponse>>() {});
+        System.out.println(pedidosMesaResponses.get(0));
+        return pedidosMesaResponses.isEmpty() ? responseBuilder.respuestaSinResultado(null) : responseBuilder.respuestaConExito(pedidosMesaResponses);
 
     }
 }
