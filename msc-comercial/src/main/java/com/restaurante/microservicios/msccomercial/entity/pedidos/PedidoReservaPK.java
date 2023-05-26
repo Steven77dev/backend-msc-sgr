@@ -1,14 +1,13 @@
-package com.restaurante.microservicios.msccomercial.entity;
+package com.restaurante.microservicios.msccomercial.entity.pedidos;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PedidoDetPK implements Serializable {
+public class PedidoReservaPK implements Serializable {
     private String seriePedido;
     private String nroPedido;
-    private short itmPedido;
 
     @Column(name = "SERIE_PEDIDO", nullable = false, length = 10)
     @Id
@@ -30,26 +29,16 @@ public class PedidoDetPK implements Serializable {
         this.nroPedido = nroPedido;
     }
 
-    @Column(name = "ITM_PEDIDO", nullable = false)
-    @Id
-    public short getItmPedido() {
-        return itmPedido;
-    }
-
-    public void setItmPedido(short itmPedido) {
-        this.itmPedido = itmPedido;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PedidoDetPK that = (PedidoDetPK) o;
-        return itmPedido == that.itmPedido && Objects.equals(seriePedido, that.seriePedido) && Objects.equals(nroPedido, that.nroPedido);
+        PedidoReservaPK that = (PedidoReservaPK) o;
+        return Objects.equals(seriePedido, that.seriePedido) && Objects.equals(nroPedido, that.nroPedido);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seriePedido, nroPedido, itmPedido);
+        return Objects.hash(seriePedido, nroPedido);
     }
 }

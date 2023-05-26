@@ -1,22 +1,21 @@
-package com.restaurante.microservicios.msccomercial.entity;
+package com.restaurante.microservicios.msccomercial.entity.pedidos;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PEDIDO_DET")
-@IdClass(PedidoDetPK.class)
-public class PedidoDet {
+@Table(name = "PEDIDO_DET_CONTENIDO")
+@IdClass(PedidoDetContenidoPK.class)
+public class PedidoDetContenido {
     private String seriePedido;
     private String nroPedido;
     private short itmPedido;
-    private short entidad;
+    private short itmContenido;
+    private Short entidad;
     private String producto;
-    private BigDecimal precio;
-    private int cantidad;
-    private BigDecimal subTotal;
+    private String serieBono;
+    private String nroBono;
     private short estadoRegistro;
     private String creacionSesion;
     private Timestamp creacionFecha;
@@ -53,18 +52,28 @@ public class PedidoDet {
         this.itmPedido = itmPedido;
     }
 
+    @Id
+    @Column(name = "ITM_CONTENIDO", nullable = false)
+    public short getItmContenido() {
+        return itmContenido;
+    }
+
+    public void setItmContenido(short itmContenido) {
+        this.itmContenido = itmContenido;
+    }
+
     @Basic
-    @Column(name = "ENTIDAD", nullable = false)
-    public short getEntidad() {
+    @Column(name = "ENTIDAD", nullable = true)
+    public Short getEntidad() {
         return entidad;
     }
 
-    public void setEntidad(short entidad) {
+    public void setEntidad(Short entidad) {
         this.entidad = entidad;
     }
 
     @Basic
-    @Column(name = "PRODUCTO", nullable = false, length = 10)
+    @Column(name = "PRODUCTO", nullable = true, length = 10)
     public String getProducto() {
         return producto;
     }
@@ -74,33 +83,23 @@ public class PedidoDet {
     }
 
     @Basic
-    @Column(name = "PRECIO", nullable = false, precision = 4)
-    public BigDecimal getPrecio() {
-        return precio;
+    @Column(name = "SERIE_BONO", nullable = true, length = 10)
+    public String getSerieBono() {
+        return serieBono;
     }
 
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
-    }
-
-    @Basic
-    @Column(name = "CANTIDAD", nullable = false)
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setSerieBono(String serieBono) {
+        this.serieBono = serieBono;
     }
 
     @Basic
-    @Column(name = "SUB_TOTAL", nullable = false, precision = 4)
-    public BigDecimal getSubTotal() {
-        return subTotal;
+    @Column(name = "NRO_BONO", nullable = true, length = 20)
+    public String getNroBono() {
+        return nroBono;
     }
 
-    public void setSubTotal(BigDecimal subTotal) {
-        this.subTotal = subTotal;
+    public void setNroBono(String nroBono) {
+        this.nroBono = nroBono;
     }
 
     @Basic
@@ -157,12 +156,12 @@ public class PedidoDet {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PedidoDet pedidoDet = (PedidoDet) o;
-        return itmPedido == pedidoDet.itmPedido && entidad == pedidoDet.entidad && cantidad == pedidoDet.cantidad && estadoRegistro == pedidoDet.estadoRegistro && Objects.equals(seriePedido, pedidoDet.seriePedido) && Objects.equals(nroPedido, pedidoDet.nroPedido) && Objects.equals(producto, pedidoDet.producto) && Objects.equals(precio, pedidoDet.precio) && Objects.equals(subTotal, pedidoDet.subTotal) && Objects.equals(creacionSesion, pedidoDet.creacionSesion) && Objects.equals(creacionFecha, pedidoDet.creacionFecha) && Objects.equals(controlSesion, pedidoDet.controlSesion) && Objects.equals(controlFecha, pedidoDet.controlFecha);
+        PedidoDetContenido that = (PedidoDetContenido) o;
+        return itmPedido == that.itmPedido && itmContenido == that.itmContenido && estadoRegistro == that.estadoRegistro && Objects.equals(seriePedido, that.seriePedido) && Objects.equals(nroPedido, that.nroPedido) && Objects.equals(entidad, that.entidad) && Objects.equals(producto, that.producto) && Objects.equals(serieBono, that.serieBono) && Objects.equals(nroBono, that.nroBono) && Objects.equals(creacionSesion, that.creacionSesion) && Objects.equals(creacionFecha, that.creacionFecha) && Objects.equals(controlSesion, that.controlSesion) && Objects.equals(controlFecha, that.controlFecha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seriePedido, nroPedido, itmPedido, entidad, producto, precio, cantidad, subTotal, estadoRegistro, creacionSesion, creacionFecha, controlSesion, controlFecha);
+        return Objects.hash(seriePedido, nroPedido, itmPedido, itmContenido, entidad, producto, serieBono, nroBono, estadoRegistro, creacionSesion, creacionFecha, controlSesion, controlFecha);
     }
 }

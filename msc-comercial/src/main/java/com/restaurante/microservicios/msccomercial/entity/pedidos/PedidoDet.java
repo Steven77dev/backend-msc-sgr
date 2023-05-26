@@ -1,18 +1,22 @@
-package com.restaurante.microservicios.msccomercial.entity;
+package com.restaurante.microservicios.msccomercial.entity.pedidos;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PEDIDO_MESA")
-@IdClass(PedidoMesaPK.class)
-public class PedidoMesa {
+@Table(name = "PEDIDO_DET")
+@IdClass(PedidoDetPK.class)
+public class PedidoDet {
     private String seriePedido;
     private String nroPedido;
+    private short itmPedido;
     private short entidad;
-    private short local;
-    private short mesa;
+    private String producto;
+    private BigDecimal precio;
+    private int cantidad;
+    private BigDecimal subTotal;
     private short estadoRegistro;
     private String creacionSesion;
     private Timestamp creacionFecha;
@@ -40,6 +44,16 @@ public class PedidoMesa {
     }
 
     @Id
+    @Column(name = "ITM_PEDIDO", nullable = false)
+    public short getItmPedido() {
+        return itmPedido;
+    }
+
+    public void setItmPedido(short itmPedido) {
+        this.itmPedido = itmPedido;
+    }
+
+    @Basic
     @Column(name = "ENTIDAD", nullable = false)
     public short getEntidad() {
         return entidad;
@@ -49,24 +63,44 @@ public class PedidoMesa {
         this.entidad = entidad;
     }
 
-    @Id
-    @Column(name = "LOCAL", nullable = false)
-    public short getLocal() {
-        return local;
+    @Basic
+    @Column(name = "PRODUCTO", nullable = false, length = 10)
+    public String getProducto() {
+        return producto;
     }
 
-    public void setLocal(short local) {
-        this.local = local;
+    public void setProducto(String producto) {
+        this.producto = producto;
     }
 
-    @Id
-    @Column(name = "MESA", nullable = false)
-    public short getMesa() {
-        return mesa;
+    @Basic
+    @Column(name = "PRECIO", nullable = false, precision = 4)
+    public BigDecimal getPrecio() {
+        return precio;
     }
 
-    public void setMesa(short mesa) {
-        this.mesa = mesa;
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
+
+    @Basic
+    @Column(name = "CANTIDAD", nullable = false)
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    @Basic
+    @Column(name = "SUB_TOTAL", nullable = false, precision = 4)
+    public BigDecimal getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(BigDecimal subTotal) {
+        this.subTotal = subTotal;
     }
 
     @Basic
@@ -123,12 +157,12 @@ public class PedidoMesa {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PedidoMesa that = (PedidoMesa) o;
-        return entidad == that.entidad && local == that.local && mesa == that.mesa && estadoRegistro == that.estadoRegistro && Objects.equals(seriePedido, that.seriePedido) && Objects.equals(nroPedido, that.nroPedido) && Objects.equals(creacionSesion, that.creacionSesion) && Objects.equals(creacionFecha, that.creacionFecha) && Objects.equals(controlSesion, that.controlSesion) && Objects.equals(controlFecha, that.controlFecha);
+        PedidoDet pedidoDet = (PedidoDet) o;
+        return itmPedido == pedidoDet.itmPedido && entidad == pedidoDet.entidad && cantidad == pedidoDet.cantidad && estadoRegistro == pedidoDet.estadoRegistro && Objects.equals(seriePedido, pedidoDet.seriePedido) && Objects.equals(nroPedido, pedidoDet.nroPedido) && Objects.equals(producto, pedidoDet.producto) && Objects.equals(precio, pedidoDet.precio) && Objects.equals(subTotal, pedidoDet.subTotal) && Objects.equals(creacionSesion, pedidoDet.creacionSesion) && Objects.equals(creacionFecha, pedidoDet.creacionFecha) && Objects.equals(controlSesion, pedidoDet.controlSesion) && Objects.equals(controlFecha, pedidoDet.controlFecha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seriePedido, nroPedido, entidad, local, mesa, estadoRegistro, creacionSesion, creacionFecha, controlSesion, controlFecha);
+        return Objects.hash(seriePedido, nroPedido, itmPedido, entidad, producto, precio, cantidad, subTotal, estadoRegistro, creacionSesion, creacionFecha, controlSesion, controlFecha);
     }
 }

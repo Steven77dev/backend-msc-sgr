@@ -3,7 +3,6 @@ package com.interconectados.sgrvbackend.service;
 import com.interconectados.sgrvbackend.Objeto;
 import com.interconectados.sgrvbackend.models.request.BusqMesasRequest;
 import com.interconectados.sgrvbackend.models.request.BusqPedidosMesaRequest;
-import com.interconectados.sgrvbackend.models.request.UsuarioRequest;
 import com.interconectados.sgrvbackend.utils.ApiResponse;
 import com.interconectados.sgrvbackend.utils.ConvertirApiResponse;
 import com.restaurante.microservicios.common.response.Response;

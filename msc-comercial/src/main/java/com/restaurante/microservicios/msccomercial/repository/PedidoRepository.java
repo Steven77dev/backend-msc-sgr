@@ -1,6 +1,6 @@
 package com.restaurante.microservicios.msccomercial.repository;
 
-import com.restaurante.microservicios.msccomercial.entity.Pedido;
+import com.restaurante.microservicios.msccomercial.entity.pedidos.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

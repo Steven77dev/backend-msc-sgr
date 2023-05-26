@@ -1,4 +1,4 @@
-package com.restaurante.microservicios.msccomercial.entity;
+package com.restaurante.microservicios.msccomercial.entity.pedidos;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

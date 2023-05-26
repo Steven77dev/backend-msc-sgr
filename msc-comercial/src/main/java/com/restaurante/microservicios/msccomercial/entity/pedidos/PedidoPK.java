@@ -1,11 +1,11 @@
-package com.restaurante.microservicios.msccomercial.entity;
+package com.restaurante.microservicios.msccomercial.entity.pedidos;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PedidoReservaPK implements Serializable {
+public class PedidoPK implements Serializable {
     private String seriePedido;
     private String nroPedido;
 
@@ -33,8 +33,8 @@ public class PedidoReservaPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PedidoReservaPK that = (PedidoReservaPK) o;
-        return Objects.equals(seriePedido, that.seriePedido) && Objects.equals(nroPedido, that.nroPedido);
+        PedidoPK pedidoPK = (PedidoPK) o;
+        return Objects.equals(seriePedido, pedidoPK.seriePedido) && Objects.equals(nroPedido, pedidoPK.nroPedido);
     }
 
     @Override

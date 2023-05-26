@@ -1,14 +1,14 @@
-package com.restaurante.microservicios.msccomercial.entity;
+package com.restaurante.microservicios.msccomercial.entity.pedidos;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PedidoVoucherPK implements Serializable {
+public class PedidoPagoPK implements Serializable {
     private String seriePedido;
     private String nroPedido;
-    private short itmVoucher;
+    private short itmPago;
 
     @Column(name = "SERIE_PEDIDO", nullable = false, length = 10)
     @Id
@@ -30,26 +30,26 @@ public class PedidoVoucherPK implements Serializable {
         this.nroPedido = nroPedido;
     }
 
-    @Column(name = "ITM_VOUCHER", nullable = false)
+    @Column(name = "ITM_PAGO", nullable = false)
     @Id
-    public short getItmVoucher() {
-        return itmVoucher;
+    public short getItmPago() {
+        return itmPago;
     }
 
-    public void setItmVoucher(short itmVoucher) {
-        this.itmVoucher = itmVoucher;
+    public void setItmPago(short itmPago) {
+        this.itmPago = itmPago;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PedidoVoucherPK that = (PedidoVoucherPK) o;
-        return itmVoucher == that.itmVoucher && Objects.equals(seriePedido, that.seriePedido) && Objects.equals(nroPedido, that.nroPedido);
+        PedidoPagoPK that = (PedidoPagoPK) o;
+        return itmPago == that.itmPago && Objects.equals(seriePedido, that.seriePedido) && Objects.equals(nroPedido, that.nroPedido);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seriePedido, nroPedido, itmVoucher);
+        return Objects.hash(seriePedido, nroPedido, itmPago);
     }
 }
