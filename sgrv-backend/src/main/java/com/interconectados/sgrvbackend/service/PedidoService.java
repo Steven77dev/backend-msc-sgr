@@ -1,7 +1,6 @@
 package com.interconectados.sgrvbackend.service;
 
-import com.interconectados.sgrvbackend.models.request.BusqMesasRequest;
-import com.interconectados.sgrvbackend.models.request.BusqPedidosMesaRequest;
+import com.interconectados.sgrvbackend.models.request.*;
 import com.restaurante.microservicios.common.response.Response;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -16,4 +15,14 @@ public interface PedidoService {
 
     @PostMapping("/pedidos/listarPedidosPorMesa")
     ResponseEntity<Response<Object>> listarPedidosPorMesa(@RequestBody BusqPedidosMesaRequest request);
+
+    @PostMapping("/pedidos/agregarProductoPedido")
+    ResponseEntity<Response<Object>> agregarProductoPedido(@RequestBody AgregarProductoPedidoRequest request);
+
+    @PostMapping("/pedidos/crearPedido")
+    ResponseEntity<Response<Object>> crearPedido(@RequestBody CrearPedidoRequest request);
+
+    @PostMapping("/pedidos/asignarMesaPedido")
+    ResponseEntity<Response<Object>> asignarMesaPedido(@RequestBody AsignarMesaPedidoRequest request);
+
 }

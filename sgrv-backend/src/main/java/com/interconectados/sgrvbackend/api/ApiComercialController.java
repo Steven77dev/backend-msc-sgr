@@ -1,8 +1,6 @@
 package com.interconectados.sgrvbackend.api;
 
-import com.interconectados.sgrvbackend.models.request.BusqMesasRequest;
-import com.interconectados.sgrvbackend.models.request.BusqPedidosMesaRequest;
-import com.interconectados.sgrvbackend.models.request.BusqProductoPorPedirRequest;
+import com.interconectados.sgrvbackend.models.request.*;
 import com.interconectados.sgrvbackend.service.PedidoServiceImpl;
 import com.interconectados.sgrvbackend.service.ProductoServiceImpl;
 import com.interconectados.sgrvbackend.utils.ApiResponse;
@@ -38,5 +36,15 @@ public class ApiComercialController {
     @PostMapping(value = "/productosPorPedir", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse listarProductosPorPedir(@RequestBody BusqProductoPorPedirRequest request){
         return productoService.listarProductosPedir(request);
+    }
+
+    @PostMapping(value = "/agregarProductoPedido", produces = MediaType.APPLICATION_JSON_VALUE)
+    ApiResponse agregarProductoPedido(@RequestBody AgregarProductoPedidoRequest request){
+        return pedidoService.agregarProductoPedido(request);
+    }
+
+    @PostMapping(value = "/crearPedido", produces = MediaType.APPLICATION_JSON_VALUE)
+    ApiResponse crearPedido(@RequestBody CrearPedidoRequest request){
+        return pedidoService.crearPedido(request);
     }
 }

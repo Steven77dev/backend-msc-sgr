@@ -7,6 +7,62 @@ import java.util.Objects;
 
 @Entity
 @IdClass(PedidoPK.class)
+@NamedStoredProcedureQuery(
+        name = "agregarProductoPedido",
+        procedureName = "ATEN.SQL_PEDIDO_DET",
+        parameters = {
+                @StoredProcedureParameter(name = "LITIPSQL", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSSERPED", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSNROPED", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LIITMPED", type = Integer.class, mode = ParameterMode.OUT),
+                @StoredProcedureParameter(name = "LIENTIDA", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSPRODUC", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LNPRECIO", type = BigDecimal.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LICANTID", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LNSUBTOT", type = BigDecimal.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LIESTADO", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LINUMRES", type = String.class, mode = ParameterMode.OUT),
+                @StoredProcedureParameter(name = "LSSESION", type = String.class, mode = ParameterMode.IN)
+        }
+)
+
+@NamedStoredProcedureQuery(
+        name = "crearPedido",
+        procedureName = "ATEN.SQL_PEDIDO",
+        parameters = {
+                @StoredProcedureParameter(name = "LITIPSQL", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSSERPED", type = String.class, mode = ParameterMode.OUT),
+                @StoredProcedureParameter(name = "LSNROPED", type = String.class, mode = ParameterMode.OUT),
+                @StoredProcedureParameter(name = "LSNOMCLI", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSPERATE", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSFECING", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LNMONTOT", type = BigDecimal.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSOBSERV", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LICANPER", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LILOCALE", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LIPUNATE", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LIESTADO", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LINUMRES", type = String.class, mode = ParameterMode.OUT),
+                @StoredProcedureParameter(name = "LSSESION", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSPEDIDO", type = String.class, mode = ParameterMode.OUT),
+        }
+)
+
+@NamedStoredProcedureQuery(
+        name = "asignarMesaPedido",
+        procedureName = "ATEN.SQL_PEDIDO_MESA",
+        parameters = {
+                @StoredProcedureParameter(name = "LITIPSQL", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSSERPED", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LSNROPED", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LIENTIDA", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LILOCALE", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LINUMESA", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LIESTADO", type = Integer.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "LINUMRES", type = String.class, mode = ParameterMode.OUT),
+                @StoredProcedureParameter(name = "LSSESION", type = String.class, mode = ParameterMode.IN),
+        }
+)
 public class Pedido {
     private String seriePedido;
     private String nroPedido;
