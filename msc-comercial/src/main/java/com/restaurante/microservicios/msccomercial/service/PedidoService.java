@@ -48,7 +48,6 @@ public class PedidoService {
         logger.info("Listado de mesas disponibles u ocupadas del local {}", request );
         List<Map<String, Object>> respuesta = pedidoRepository.listarPedidosPorMesa(1, request.getSeriePedido(), request.getNroPedido(), request.getItemPedido(), request.getEntidad(), request.getAlmacen(),"","","");
         List<PedidosMesaResponse> pedidosMesaResponses = objectMapper.convertValue(respuesta,new TypeReference<List<PedidosMesaResponse>>() {});
-        System.out.println(pedidosMesaResponses.get(0));
         return pedidosMesaResponses.isEmpty() ? responseBuilder.respuestaSinResultado(null) : responseBuilder.respuestaConExito(pedidosMesaResponses);
 
     }

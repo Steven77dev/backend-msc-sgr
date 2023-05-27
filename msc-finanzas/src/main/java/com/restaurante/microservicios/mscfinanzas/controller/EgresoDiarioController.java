@@ -1,15 +1,10 @@
 package com.restaurante.microservicios.mscfinanzas.controller;
 
 import com.restaurante.microservicios.common.response.Response;
-import com.restaurante.microservicios.mscfinanzas.models.request.BusqAperturaCierreRequest;
 import com.restaurante.microservicios.mscfinanzas.models.request.BusqIngresoEgresoRequest;
 import com.restaurante.microservicios.mscfinanzas.models.request.BusqIngresoPersonalRequest;
-import com.restaurante.microservicios.mscfinanzas.models.response.AperturaCierreResponse;
-import com.restaurante.microservicios.mscfinanzas.models.response.IngresoEgresoResponse;
 import com.restaurante.microservicios.mscfinanzas.models.response.ResumenEgrePersonalResponse;
-import com.restaurante.microservicios.mscfinanzas.models.response.ResumenIngrePersonalResponse;
 import com.restaurante.microservicios.mscfinanzas.service.EgresoDiarioService;
-import com.restaurante.microservicios.mscfinanzas.service.IngresoDiarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
