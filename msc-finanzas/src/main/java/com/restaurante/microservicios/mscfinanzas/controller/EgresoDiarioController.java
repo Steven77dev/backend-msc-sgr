@@ -39,12 +39,12 @@ public class EgresoDiarioController {
                                     schema = @Schema(implementation = ResumenEgrePersonalResponse.class))})
             })
     @PostMapping("/resumenEgresosPersonal")
-    public ResponseEntity<Response<Object>> resumenEgresosPersonal(@Valid @RequestBody BusqIngresoPersonalRequest request){
+    public Response<Object> resumenEgresosPersonal(@Valid @RequestBody BusqIngresoPersonalRequest request){
         return egresoDiarioService.listadoEgresosPersonal(request);
     }
 
     @PostMapping("/cajaCierreAnterior")
-    public ResponseEntity<Response<Object>> cajaCierreAnterior(@Valid @RequestBody BusqIngresoEgresoRequest request){
+    public Response<Object> cajaCierreAnterior(@Valid @RequestBody BusqIngresoEgresoRequest request){
         return egresoDiarioService.cierreCajaDiaAnterior(request);
     }
 }

@@ -1,8 +1,6 @@
 package com.interconectados.sgrvbackend.service;
 
 import com.interconectados.sgrvbackend.Objeto;
-import com.interconectados.sgrvbackend.models.request.BusqMesasRequest;
-import com.interconectados.sgrvbackend.models.request.BusqPedidosMesaRequest;
 import com.interconectados.sgrvbackend.models.request.BusqProductoPorPedirRequest;
 import com.interconectados.sgrvbackend.utils.ApiResponse;
 import com.interconectados.sgrvbackend.utils.ConvertirApiResponse;
@@ -20,11 +18,11 @@ public class ProductoServiceImpl {
 
     public ApiResponse listarProductosPedir(BusqProductoPorPedirRequest request) {
 
-        if(Objeto.anyEmpty(request.getAlmacen(), request.getEntidad())){
+        if(Objeto.anyEmpty(request.getAlmacen(), request.getEntidad()).booleanValue()){
             return ApiResponse.parametrosIncorrectos();
         }
 
-        Response responseEntity=  productoService.listarProductosPedir(request).getBody();
+        Response<?> responseEntity=  productoService.listarProductosPedir(request);
         if (responseEntity.hayError()) {
             return ApiResponse.error();
         } else {

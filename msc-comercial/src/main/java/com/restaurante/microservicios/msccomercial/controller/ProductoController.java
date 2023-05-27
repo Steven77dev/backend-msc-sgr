@@ -36,7 +36,7 @@ public class ProductoController {
                                     schema = @Schema(implementation = ListadoMesasAtencionResponse.class))})
             })
     @PostMapping("/listarProductosPedir")
-    public ResponseEntity<Response<Object>> productosPorPedir(@Valid @RequestBody BusqProductoPorPedirRequest request){
+    public Response<Object> productosPorPedir(@Valid @RequestBody BusqProductoPorPedirRequest request){
         return productoService.productosPorPedir(request);
 
     }

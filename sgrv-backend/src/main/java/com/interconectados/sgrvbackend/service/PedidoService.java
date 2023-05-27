@@ -3,7 +3,6 @@ package com.interconectados.sgrvbackend.service;
 import com.interconectados.sgrvbackend.models.request.*;
 import com.restaurante.microservicios.common.response.Response;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -11,18 +10,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface PedidoService {
 
     @PostMapping("/pedidos/listadoMesasLocal")
-    ResponseEntity<Response<Object>> listadoMesasLocal(@RequestBody BusqMesasRequest request);
+    Response<Object> listadoMesasLocal(@RequestBody BusqMesasRequest request);
 
     @PostMapping("/pedidos/listarPedidosPorMesa")
-    ResponseEntity<Response<Object>> listarPedidosPorMesa(@RequestBody BusqPedidosMesaRequest request);
+    Response<Object> listarPedidosPorMesa(@RequestBody BusqPedidosMesaRequest request);
 
     @PostMapping("/pedidos/agregarProductoPedido")
-    ResponseEntity<Response<Object>> agregarProductoPedido(@RequestBody AgregarProductoPedidoRequest request);
+    Response<Object> agregarProductoPedido(@RequestBody AgregarProductoPedidoRequest request);
 
     @PostMapping("/pedidos/crearPedido")
-    ResponseEntity<Response<Object>> crearPedido(@RequestBody CrearPedidoRequest request);
+    Response<Object> crearPedido(@RequestBody CrearPedidoRequest request);
 
     @PostMapping("/pedidos/asignarMesaPedido")
-    ResponseEntity<Response<Object>> asignarMesaPedido(@RequestBody AsignarMesaPedidoRequest request);
+    Response<Object> asignarMesaPedido(@RequestBody AsignarMesaPedidoRequest request);
 
 }

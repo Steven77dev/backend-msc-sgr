@@ -3,7 +3,6 @@ package com.interconectados.sgrvbackend.service;
 import com.interconectados.sgrvbackend.models.request.BusqProductoPorPedirRequest;
 import com.restaurante.microservicios.common.response.Response;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -11,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface ProductoService {
 
     @PostMapping("/productos/listarProductosPedir")
-    ResponseEntity<Response<Object>> listarProductosPedir(@RequestBody BusqProductoPorPedirRequest request);
+    Response<Object> listarProductosPedir(@RequestBody BusqProductoPorPedirRequest request);
 }

@@ -10,6 +10,7 @@ import com.restaurante.microservicios.msccomercial.models.response.ProductosPorP
 import com.restaurante.microservicios.msccomercial.repository.ProductoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +32,13 @@ public class ProductoService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Response<Object>> productosPorPedir(BusqProductoPorPedirRequest request){
+    @Cacheable("productosPedir")
+    public Response<Object> productosPorPedir(BusqProductoPorPedirRequest request){
         logger.info("Listado de productos que tengo para pedir {}", request );
         List<Map<String, Object>> respuesta = productoRepository.buscarProductosPorAlmacenFamilia(11, request.getEntidad(),request.getAlmacen(),request.getFamilia(), request.getLocal(),"","");
         List<ProductosPorPedirResponse> productosAlmaFamResponse = objectMapper.convertValue(respuesta,new TypeReference<List<ProductosPorPedirResponse>>() {});
-        return productosAlmaFamResponse.isEmpty() ? responseBuilder.respuestaSinResultado(null) : responseBuilder.respuestaConExito(productosAlmaFamResponse);
+        System.out.println(productosAlmaFamResponse);
+        return productosAlmaFamResponse.isEmpty() ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(productosAlmaFamResponse).getBody();
 
     }
 

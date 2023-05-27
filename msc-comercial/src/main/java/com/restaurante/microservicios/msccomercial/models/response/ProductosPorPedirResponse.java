@@ -9,41 +9,35 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductosPorPedirResponse {
-
-    @JsonSetter("PRODUCTO")
+//@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductosPorPedirResponse implements Serializable {
+    @JsonProperty("producto")
     private String producto;
 
     @JsonProperty("desProducto")
-    @JsonSetter("DESPRODUCTO")
     private String desProducto;
 
     @JsonProperty("precio")
-    @JsonSetter("PRECIO")
     private BigDecimal precio;
 
     @JsonProperty("desFamilia")
-    @JsonSetter("DESFAMILIA")
     private String desFamilia;
 
     @JsonProperty("saldo")
-    @JsonSetter("SALDO")
     private BigDecimal saldo;
 
     @JsonProperty("precioFormateado")
-    @JsonSetter("PRECIO_FORMAT")
     private String precioFormateado;
 
     @JsonProperty("tipoProducto")
-    @JsonSetter("TIPO_PRODUCTO")
     private int tipoProducto;
 
 }

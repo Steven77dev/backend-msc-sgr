@@ -35,35 +35,35 @@ public class PedidoService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Response<Object>> listadoMesasLocal(BusqMesasRequest request){
+    public Response<Object> listadoMesasLocal(BusqMesasRequest request){
         logger.info("Listado de mesas disponibles u ocupadas del local {}", request );
         List<Map<String, Object>> respuesta = pedidoRepository.listadoMesas(1, request.getEntidad(),request.getLocal(),request.getFecha(), request.getEstado());
         List<ListadoMesasAtencionResponse> listadoMesasAtencionResponse = objectMapper.convertValue(respuesta,new TypeReference<List<ListadoMesasAtencionResponse>>() {});
-        return listadoMesasAtencionResponse.isEmpty() ? responseBuilder.respuestaSinResultado(null) : responseBuilder.respuestaConExito(listadoMesasAtencionResponse);
+        return listadoMesasAtencionResponse.isEmpty() ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(listadoMesasAtencionResponse).getBody();
 
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Response<Object>> listarPedidosPorMesa(BusqPedidosMesaRequest request){
+    public Response<Object> listarPedidosPorMesa(BusqPedidosMesaRequest request){
         logger.info("Listado de mesas disponibles u ocupadas del local {}", request );
         List<Map<String, Object>> respuesta = pedidoRepository.listarPedidosPorMesa(1, request.getSeriePedido(), request.getNroPedido(), request.getItemPedido(), request.getEntidad(), request.getAlmacen(),"","","");
         List<PedidosMesaResponse> pedidosMesaResponses = objectMapper.convertValue(respuesta,new TypeReference<List<PedidosMesaResponse>>() {});
-        return pedidosMesaResponses.isEmpty() ? responseBuilder.respuestaSinResultado(null) : responseBuilder.respuestaConExito(pedidosMesaResponses);
+        return pedidosMesaResponses.isEmpty() ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(pedidosMesaResponses).getBody();
 
     }
 
     @Transactional
-    public ResponseEntity<Response<Object>> agregarProductoPedido(AgregarProductoPedidoRequest request){
+    public Response<Object> agregarProductoPedido(AgregarProductoPedidoRequest request){
         Map<String, Object> itemResult =pedidoRepository.agregarProductoPedido(1,request.getSeriePedido(),request.getNroPedido(), request.getEntidad(),request.getProducto(),request.getPrecio(),request.getCantidad(),request.getSubtotal(), request.getEstado(), request.getSession());
         ProductoPedidoItemResponse codigoSPResponse = new ProductoPedidoItemResponse();
         codigoSPResponse.setCodigoRspta(itemResult.get("LINUMRES").toString());
         codigoSPResponse.setItemPedido(Integer.parseInt(itemResult.get("LIITMPED").toString()));
-        return !codigoSPResponse.getCodigoRspta().equals("501") ? responseBuilder.respuestaConError(codigoSPResponse) : responseBuilder.respuestaConExito(codigoSPResponse);
+        return !codigoSPResponse.getCodigoRspta().equals("501") ? responseBuilder.respuestaConError(codigoSPResponse).getBody() : responseBuilder.respuestaConExito(codigoSPResponse).getBody();
 
     }
 
     @Transactional
-    public ResponseEntity<Response<Object>> crearPedido(CrearPedidoRequest request){
+    public Response<Object> crearPedido(CrearPedidoRequest request){
         logger.info("Crear pedido {}", request );
         Map<String, Object> resultado =pedidoRepository.crearPedido(1,request.getNombreCliente(), request.getPersonalAtencion(), request.getFechaIngreso(), request.getMontoTotal(), request.getObservacion(), request.getCantidadPersonas(), request.getLocal(), request.getPuntoAtencion(), request.getEstado(), request.getSession());
         PedidoCreadoResponse response = new PedidoCreadoResponse();
@@ -71,17 +71,17 @@ public class PedidoService {
         response.setSeriePedido(resultado.get("LSSERPED").toString());
         response.setNroPedido(resultado.get("LSNROPED").toString());
         response.setCodigoPedido(resultado.get("LSPEDIDO").toString());
-        return !response.getCodigoRspta().equals("501") ? responseBuilder.respuestaConError(response) : responseBuilder.respuestaConExito(response);
+        return !response.getCodigoRspta().equals("501") ? responseBuilder.respuestaConError(response).getBody() : responseBuilder.respuestaConExito(response).getBody();
 
     }
 
     @Transactional
-    public ResponseEntity<Response<Object>> asignarMesaPedido(AsignarMesaPedidoRequest request){
+    public Response<Object> asignarMesaPedido(AsignarMesaPedidoRequest request){
         logger.info("Asignar mesa a pedido {}", request );
         String resultado =pedidoRepository.asignarMesaPedido(1,request.getSeriePedido(), request.getNroPedido(), request.getEntidad(), request.getLocal(), request.getNroMesa(), request.getEstado(), request.getSession());
         SqlSPResponse response = new SqlSPResponse();
         response.setCodigoRspta(resultado);
-        return !response.getCodigoRspta().equals("501") ? responseBuilder.respuestaConError(response) : responseBuilder.respuestaConExito(response);
+        return !response.getCodigoRspta().equals("501") ? responseBuilder.respuestaConError(response).getBody(): responseBuilder.respuestaConExito(response).getBody();
 
     }
 }

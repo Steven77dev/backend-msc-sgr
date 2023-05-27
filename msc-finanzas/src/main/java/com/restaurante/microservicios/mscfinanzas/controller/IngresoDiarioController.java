@@ -39,7 +39,7 @@ public class IngresoDiarioController {
                                     schema = @Schema(implementation = IngresoEgresoResponse.class))})
             })
     @PostMapping("/ingresosVsEgresos")
-    public ResponseEntity<Response<Object>> ingresosVsEgresos(@Valid @RequestBody BusqIngresoEgresoRequest request){
+    public Response<Object> ingresosVsEgresos(@Valid @RequestBody BusqIngresoEgresoRequest request){
         return ingresoDiarioService.listadoIngresosVsEgresos(request);
 
     }
@@ -52,7 +52,7 @@ public class IngresoDiarioController {
                                     schema = @Schema(implementation = AperturaCierreResponse.class))})
             })
     @PostMapping("/aperturaCierre")
-    public ResponseEntity<Response<Object>> datosAperturaCierre(@Valid @RequestBody BusqAperturaCierreRequest request){
+    public Response<Object> datosAperturaCierre(@Valid @RequestBody BusqAperturaCierreRequest request){
         return ingresoDiarioService.datosAperturaCierre(request);
 
     }
@@ -65,7 +65,7 @@ public class IngresoDiarioController {
                                     schema = @Schema(implementation = ResumenIngrePersonalResponse.class))})
             })
     @PostMapping("/resumenIngresosPersonal")
-    public ResponseEntity<Response<Object>> resumenIngresosPersonal(@Valid @RequestBody BusqIngresoPersonalRequest request){
+    public Response<Object> resumenIngresosPersonal(@Valid @RequestBody BusqIngresoPersonalRequest request){
         return ingresoDiarioService.listadoIngresosPersonal(request);
     }
 
@@ -77,7 +77,7 @@ public class IngresoDiarioController {
                                     schema = @Schema(implementation = SqlSPResponse.class))})
             })
     @PostMapping("/cuadrarCaja")
-    public ResponseEntity<Response<Object>> cuadrarCaja(@Valid @RequestBody CuadrarCajaRequest request){
+    public Response<Object> cuadrarCaja(@Valid @RequestBody CuadrarCajaRequest request){
         return ingresoDiarioService.cuadrarCaja(request);
     }
 
@@ -89,7 +89,7 @@ public class IngresoDiarioController {
                                     schema = @Schema(implementation = SqlSPResponse.class))})
             })
     @PostMapping("/cerrarCaja")
-    public ResponseEntity<Response<Object>> cerrarCaja(@Valid @RequestBody CerrarCajaRequest request){
+    public Response<Object> cerrarCaja(@Valid @RequestBody CerrarCajaRequest request){
         return ingresoDiarioService.cerrarCaja(request);
     }
 }

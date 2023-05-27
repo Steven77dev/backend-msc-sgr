@@ -40,13 +40,13 @@ public class PedidoController {
                                     schema = @Schema(implementation = ListadoMesasAtencionResponse.class))})
             })
     @PostMapping("/listadoMesasLocal")
-    public ResponseEntity<Response<Object>> listadoMesasLocal(@Valid @RequestBody BusqMesasRequest request){
+    public Response<Object> listadoMesasLocal(@Valid @RequestBody BusqMesasRequest request){
         return pedidoService.listadoMesasLocal(request);
 
     }
 
     @PostMapping("/listarPedidosPorMesa")
-    public ResponseEntity<Response<Object>> listarPedidosPorMesa(@Valid @RequestBody BusqPedidosMesaRequest request){
+    public Response<Object> listarPedidosPorMesa(@Valid @RequestBody BusqPedidosMesaRequest request){
         return pedidoService.listarPedidosPorMesa(request);
 
     }
@@ -59,7 +59,7 @@ public class PedidoController {
                                     schema = @Schema(implementation = ProductoPedidoItemResponse.class))})
             })
     @PostMapping("/agregarProductoPedido")
-    public ResponseEntity<Response<Object>> agregarProductoPedido(@Valid @RequestBody AgregarProductoPedidoRequest request){
+    public Response<Object> agregarProductoPedido(@Valid @RequestBody AgregarProductoPedidoRequest request){
         logger.info("Agregar producto al pedido {}", request );
         return pedidoService.agregarProductoPedido(request);
     }
@@ -72,7 +72,7 @@ public class PedidoController {
                                     schema = @Schema(implementation = PedidoCreadoResponse.class))})
             })
     @PostMapping("/crearPedido")
-    public ResponseEntity<Response<Object>> crearPedido(@Valid @RequestBody CrearPedidoRequest request){
+    public Response<Object> crearPedido(@Valid @RequestBody CrearPedidoRequest request){
         return pedidoService.crearPedido(request);
     }
 
@@ -84,7 +84,7 @@ public class PedidoController {
                                     schema = @Schema(implementation = SqlSPResponse.class))})
             })
     @PostMapping("/asignarMesaPedido")
-    public ResponseEntity<Response<Object>> asignarMesaPedido(@Valid @RequestBody AsignarMesaPedidoRequest request){
+    public Response<Object> asignarMesaPedido(@Valid @RequestBody AsignarMesaPedidoRequest request){
         return pedidoService.asignarMesaPedido(request);
     }
 }

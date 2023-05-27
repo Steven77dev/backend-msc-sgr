@@ -35,20 +35,20 @@ public class EgresoDiarioService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Response<Object>> listadoEgresosPersonal(BusqIngresoPersonalRequest request){
+    public Response<Object> listadoEgresosPersonal(BusqIngresoPersonalRequest request){
         logger.info("Obteniendo resumen de egresos del personal {}", request );
         List<Map<String, Object>> respuesta = egresoDiarioRepository.resumenEgresoPersonal(2,"","",request.getLocal(),request.getDesFecha(), request.getCodPersonal(), request.getDesFecHoraInicio(), request.getDesFecHoraFin());
         List<ResumenEgrePersonalResponse> egresoResponseList = objectMapper.convertValue(respuesta,new TypeReference<List<ResumenEgrePersonalResponse>>() {});
-        return egresoResponseList.isEmpty() ? responseBuilder.respuestaSinResultado(null) : responseBuilder.respuestaConExito(egresoResponseList);
+        return egresoResponseList.isEmpty() ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(egresoResponseList).getBody();
 
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Response<Object>> cierreCajaDiaAnterior(BusqIngresoEgresoRequest request){
+    public Response<Object> cierreCajaDiaAnterior(BusqIngresoEgresoRequest request){
         logger.info("Obteniendo monto de cierre del día anterior {}", request );
         Map<String, Object> respuesta = egresoDiarioRepository.cierreCajaDiaAnterior(4,"","",request.getLocal(),request.getDesFecha(), "", "", "");
         CajaCierreAnteriorResponse cajaCierreAnteriorResponse = objectMapper.convertValue(respuesta,CajaCierreAnteriorResponse.class);
-        return cajaCierreAnteriorResponse.getTotal()==null ? responseBuilder.respuestaSinResultado(null) : responseBuilder.respuestaConExito(cajaCierreAnteriorResponse);
+        return cajaCierreAnteriorResponse.getTotal()==null ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(cajaCierreAnteriorResponse).getBody();
 
     }
 }

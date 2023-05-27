@@ -26,7 +26,7 @@ public class PedidoServiceImpl {
             return ApiResponse.parametrosIncorrectos();
         }
 
-        Response<?> responseEntity=  pedidoService.listadoMesasLocal(request).getBody();
+        Response<?> responseEntity=  pedidoService.listadoMesasLocal(request);
         if (responseEntity.hayError()) return ApiResponse.error();
         else {
             return ConvertirApiResponse.exito(responseEntity);
@@ -39,7 +39,7 @@ public class PedidoServiceImpl {
             return ApiResponse.parametrosIncorrectos();
         }
 
-        Response<?> responseEntity=  pedidoService.listarPedidosPorMesa(request).getBody();
+        Response<?> responseEntity=  pedidoService.listarPedidosPorMesa(request);
         if (responseEntity.hayError()) {
             return ApiResponse.error();
         } else {
@@ -53,7 +53,7 @@ public class PedidoServiceImpl {
             return ApiResponse.parametrosIncorrectos();
         }
 
-        Response<?> responseEntity=  pedidoService.agregarProductoPedido(request).getBody();
+        Response<?> responseEntity=  pedidoService.agregarProductoPedido(request);
         if (responseEntity.hayError()) {
             return ApiResponse.error();
         } else {
@@ -67,7 +67,7 @@ public class PedidoServiceImpl {
             return ApiResponse.parametrosIncorrectos();
         }
 
-        Response<?> responseEntity=  pedidoService.asignarMesaPedido(request).getBody();
+        Response<?> responseEntity=  pedidoService.asignarMesaPedido(request);
         if (responseEntity.hayError()) {
             return ApiResponse.error();
         } else {
@@ -80,7 +80,7 @@ public class PedidoServiceImpl {
             return ApiResponse.parametrosIncorrectos();
         }
 
-        Response<?> responseEntity=  pedidoService.crearPedido(request).getBody();
+        Response<?> responseEntity=  pedidoService.crearPedido(request);
         if (!responseEntity.hayError()) {
             PedidoCreadoResponse pedidoCreado = objectMapper.convertValue(responseEntity.getRespuesta(),PedidoCreadoResponse.class);
             AsignarMesaPedidoRequest asignarMesaPedidoRequest = request.getAsignarMesaPedido();
