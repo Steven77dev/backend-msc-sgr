@@ -11,18 +11,22 @@ import org.springframework.stereotype.Service;
 public class ProductoServiceImpl {
 
     private final ProductoService productoService;
-
-    public ProductoServiceImpl(ProductoService productoService) {
+    private final Redis redis;
+    public ProductoServiceImpl(ProductoService productoService, Redis redis) {
         this.productoService = productoService;
+        this.redis = redis;
     }
 
     public ApiResponse listarProductosPedir(BusqProductoPorPedirRequest request) {
-
-        if(Objeto.anyEmpty(request.getAlmacen(), request.getEntidad()).booleanValue()){
+        request.setEntidad(Integer.parseInt(redis.codEntidad()));
+        request.setAlmacen(redis.codAlmacen());
+        request.setLocal(redis.codLocal());
+        if(Objeto.anyEmpty(request.getAlmacen(), request.getEntidad(), request.getLocal()).booleanValue()){
             return ApiResponse.parametrosIncorrectos();
         }
 
         Response<?> responseEntity=  productoService.listarProductosPedir(request);
+        System.out.println(responseEntity.getRespuesta());
         if (responseEntity.hayError()) {
             return ApiResponse.error();
         } else {
