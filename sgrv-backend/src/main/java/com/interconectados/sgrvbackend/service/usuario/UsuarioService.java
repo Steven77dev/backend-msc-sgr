@@ -1,10 +1,11 @@
-package com.interconectados.sgrvbackend.service;
+package com.interconectados.sgrvbackend.service.usuario;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interconectados.sgrvbackend.Objeto;
 import com.interconectados.sgrvbackend.models.request.UsuarioRequest;
 import com.interconectados.sgrvbackend.models.response.PersonalUsuarioResponse;
 import com.interconectados.sgrvbackend.models.response.SesionResponse;
+import com.interconectados.sgrvbackend.service.Redis;
 import com.interconectados.sgrvbackend.utils.ApiResponse;
 import com.interconectados.sgrvbackend.utils.ConvertirApiResponse;
 import com.restaurante.microservicios.common.response.Response;
@@ -12,12 +13,12 @@ import com.restaurante.microservicios.common.utils.Serializer;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioServiceImpl  {
+public class UsuarioService {
 
-    private final UsuarioService usuarioService;
+    private final UsuarioRest usuarioService;
     private final Redis redis;
     private static ObjectMapper objectMapper = Serializer.objectMapper();
-    public UsuarioServiceImpl(UsuarioService usuarioService, Redis redis) {
+    public UsuarioService(UsuarioRest usuarioService, Redis redis) {
         this.usuarioService = usuarioService;
         this.redis = redis;
     }

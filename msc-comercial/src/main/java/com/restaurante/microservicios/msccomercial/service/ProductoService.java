@@ -37,7 +37,6 @@ public class ProductoService {
         logger.info("Listado de productos que tengo para pedir {}", request );
         List<Map<String, Object>> respuesta = productoRepository.buscarProductosPorAlmacenFamilia(11, request.getEntidad(),request.getAlmacen(),request.getFamilia(), request.getLocal(),"","");
         List<ProductosPorPedirResponse> productosAlmaFamResponse = objectMapper.convertValue(respuesta,new TypeReference<List<ProductosPorPedirResponse>>() {});
-        System.out.println(productosAlmaFamResponse);
         return productosAlmaFamResponse.isEmpty() ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(productosAlmaFamResponse).getBody();
 
     }

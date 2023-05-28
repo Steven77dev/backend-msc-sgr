@@ -1,18 +1,19 @@
-package com.interconectados.sgrvbackend.service;
+package com.interconectados.sgrvbackend.service.comercial;
 
 import com.interconectados.sgrvbackend.Objeto;
 import com.interconectados.sgrvbackend.models.request.BusqProductoPorPedirRequest;
+import com.interconectados.sgrvbackend.service.Redis;
 import com.interconectados.sgrvbackend.utils.ApiResponse;
 import com.interconectados.sgrvbackend.utils.ConvertirApiResponse;
 import com.restaurante.microservicios.common.response.Response;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProductoServiceImpl {
+public class ProductoService {
 
-    private final ProductoService productoService;
+    private final ProductoRest productoService;
     private final Redis redis;
-    public ProductoServiceImpl(ProductoService productoService, Redis redis) {
+    public ProductoService(ProductoRest productoService, Redis redis) {
         this.productoService = productoService;
         this.redis = redis;
     }

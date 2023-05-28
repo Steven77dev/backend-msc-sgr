@@ -6,10 +6,7 @@ import com.restaurante.microservicios.common.response.ApiResponseBuilder;
 import com.restaurante.microservicios.common.response.Response;
 import com.restaurante.microservicios.common.utils.Serializer;
 import com.restaurante.microservicios.mscfinanzas.models.request.*;
-import com.restaurante.microservicios.mscfinanzas.models.response.AperturaCierreResponse;
-import com.restaurante.microservicios.mscfinanzas.models.response.IngresoEgresoResponse;
-import com.restaurante.microservicios.mscfinanzas.models.response.ResumenIngrePersonalResponse;
-import com.restaurante.microservicios.mscfinanzas.models.response.SqlSPResponse;
+import com.restaurante.microservicios.mscfinanzas.models.response.*;
 import com.restaurante.microservicios.mscfinanzas.repository.IngresoDiarioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +46,15 @@ public class IngresoDiarioService {
         Map<String, Object> respuesta = ingresoDiarioRepository.datosAperturaCierre(6,"","",request.getLocal(),request.getDesFecha(),request.getCodPersonal(),"","");
         AperturaCierreResponse aperturaCierreResponse = objectMapper.convertValue(respuesta,AperturaCierreResponse.class);
         return aperturaCierreResponse==null ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(aperturaCierreResponse).getBody();
+
+    }
+
+    @Transactional(readOnly = true)
+    public Response<Object> verificarAperturaCaja(BusqAperturaCierreRequest request){
+        logger.info("Verificar apertura de caja {}", request );
+        Map<String, Object> respuesta = ingresoDiarioRepository.datosAperturaCierre(3,"","",request.getLocal(),request.getDesFecha(),"","","");
+        AperturaCajaResponse aperturaCajaResponse = objectMapper.convertValue(respuesta,AperturaCajaResponse.class);
+        return aperturaCajaResponse==null ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(aperturaCajaResponse).getBody();
 
     }
 

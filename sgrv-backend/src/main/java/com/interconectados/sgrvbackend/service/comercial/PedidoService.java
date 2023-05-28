@@ -1,9 +1,10 @@
-package com.interconectados.sgrvbackend.service;
+package com.interconectados.sgrvbackend.service.comercial;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interconectados.sgrvbackend.Objeto;
 import com.interconectados.sgrvbackend.models.request.*;
 import com.interconectados.sgrvbackend.models.response.PedidoCreadoResponse;
+import com.interconectados.sgrvbackend.service.Redis;
 import com.interconectados.sgrvbackend.utils.ApiResponse;
 import com.interconectados.sgrvbackend.utils.ConvertirApiResponse;
 import com.restaurante.microservicios.common.response.Response;
@@ -11,12 +12,12 @@ import com.restaurante.microservicios.common.utils.Serializer;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PedidoServiceImpl {
+public class PedidoService {
 
-    private final PedidoService pedidoService;
+    private final PedidoRest pedidoService;
     private static ObjectMapper objectMapper = Serializer.objectMapper();
     private final Redis redis;
-    public PedidoServiceImpl(PedidoService pedidoService, Redis redis) {
+    public PedidoService(PedidoRest pedidoService, Redis redis) {
         this.pedidoService = pedidoService;
         this.redis = redis;
     }

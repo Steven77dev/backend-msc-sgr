@@ -1,4 +1,4 @@
-package com.interconectados.sgrvbackend.service;
+package com.interconectados.sgrvbackend.service.usuario;
 
 import com.interconectados.sgrvbackend.models.request.UsuarioRequest;
 import com.restaurante.microservicios.common.response.Response;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "msc-usuario", url = "http://localhost:8080")
-public interface UsuarioService {
+public interface UsuarioRest {
 
     @PostMapping("/usuario/iniciarSesion")
     ResponseEntity<Response<Object>> validarSesion(@RequestBody UsuarioRequest usuarioRequest);

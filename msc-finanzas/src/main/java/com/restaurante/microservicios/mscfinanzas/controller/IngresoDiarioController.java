@@ -44,7 +44,7 @@ public class IngresoDiarioController {
 
     }
 
-    @Operation(description = "Apertura y Cierre de Caja", summary = "Se obtiene los valores si se puede aperturar o cerrar caja",
+    @Operation(description = "Apertura y cierre de caja por personal", summary = "Se obtiene los valores si se puede aperturar o cerrar caja por personal",
             responses = {
                     @ApiResponse(responseCode = "200",
                             description = "OK",
@@ -54,6 +54,19 @@ public class IngresoDiarioController {
     @PostMapping("/aperturaCierre")
     public Response<Object> datosAperturaCierre(@Valid @RequestBody BusqAperturaCierreRequest request){
         return ingresoDiarioService.datosAperturaCierre(request);
+
+    }
+
+    @Operation(description = "Verificar apertura de caja", summary = "Se obtiene los valores si caja está aperturada",
+            responses = {
+                    @ApiResponse(responseCode = "200",
+                            description = "OK",
+                            content = {@Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = AperturaCierreResponse.class))})
+            })
+    @PostMapping("/verificarAperturaCaja")
+    public Response<Object> verificarAperturaCaja(@Valid @RequestBody BusqAperturaCierreRequest request){
+        return ingresoDiarioService.verificarAperturaCaja(request);
 
     }
 

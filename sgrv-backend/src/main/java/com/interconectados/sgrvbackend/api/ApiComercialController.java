@@ -1,8 +1,8 @@
 package com.interconectados.sgrvbackend.api;
 
 import com.interconectados.sgrvbackend.models.request.*;
-import com.interconectados.sgrvbackend.service.PedidoServiceImpl;
-import com.interconectados.sgrvbackend.service.ProductoServiceImpl;
+import com.interconectados.sgrvbackend.service.comercial.PedidoService;
+import com.interconectados.sgrvbackend.service.comercial.ProductoService;
 import com.interconectados.sgrvbackend.utils.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/comercial")
 public class ApiComercialController {
 
-    private final PedidoServiceImpl pedidoService;
-    private final ProductoServiceImpl productoService;
+    private final PedidoService pedidoService;
+    private final ProductoService productoService;
 
-    public ApiComercialController(PedidoServiceImpl pedidoService, ProductoServiceImpl productoService){
+    public ApiComercialController(PedidoService pedidoService, ProductoService productoService){
         this.pedidoService = pedidoService;
         this.productoService= productoService;
     }

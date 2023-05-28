@@ -1,4 +1,4 @@
-package com.interconectados.sgrvbackend.service;
+package com.interconectados.sgrvbackend.service.comercial;
 
 import com.interconectados.sgrvbackend.models.request.*;
 import com.restaurante.microservicios.common.response.Response;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "msc-comercial", url = "http://localhost:8089")
-public interface PedidoService {
+public interface PedidoRest {
 
     @PostMapping("/pedidos/listadoMesasLocal")
     Response<Object> listadoMesasLocal(@RequestBody BusqMesasRequest request);

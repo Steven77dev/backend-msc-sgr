@@ -1,7 +1,7 @@
 package com.interconectados.sgrvbackend.api;
 
 import com.interconectados.sgrvbackend.models.request.UsuarioRequest;
-import com.interconectados.sgrvbackend.service.UsuarioServiceImpl;
+import com.interconectados.sgrvbackend.service.usuario.UsuarioService;
 import com.interconectados.sgrvbackend.utils.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/usuario")
 public class ApiUsuarioController {
 
-    private final UsuarioServiceImpl usuarioService;
+    private final UsuarioService usuarioService;
 
-    public ApiUsuarioController(UsuarioServiceImpl usuarioService){
+    public ApiUsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
     }
 
