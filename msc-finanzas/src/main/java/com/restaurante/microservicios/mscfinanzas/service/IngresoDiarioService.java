@@ -54,6 +54,7 @@ public class IngresoDiarioService {
         logger.info("Verificar apertura de caja {}", request );
         Map<String, Object> respuesta = ingresoDiarioRepository.datosAperturaCierre(3,"","",request.getLocal(),request.getDesFecha(),"","","");
         AperturaCajaResponse aperturaCajaResponse = objectMapper.convertValue(respuesta,AperturaCajaResponse.class);
+        System.out.println(aperturaCajaResponse);
         return aperturaCajaResponse==null ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(aperturaCajaResponse).getBody();
 
     }

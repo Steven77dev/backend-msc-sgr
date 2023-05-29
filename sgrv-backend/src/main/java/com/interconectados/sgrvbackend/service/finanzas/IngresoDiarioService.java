@@ -23,7 +23,7 @@ public class IngresoDiarioService {
     }
 
     public ApiResponse verificarAperturaCaja(BusqAperturaCierreRequest request) {
-        request.setLocal(redis.obtenerDato("codLocal").toString());
+        request.setLocal(redis.codLocal());
         if(Objeto.anyEmpty(request.getLocal()).booleanValue()){
             return ApiResponse.parametrosIncorrectos();
         }
@@ -31,6 +31,7 @@ public class IngresoDiarioService {
         Response<?> responseEntity=  ingresoDiarioRest.verificarAperturaCaja(request);
         if (responseEntity.hayError()) return ApiResponse.error();
         else {
+            System.out.println(responseEntity.getRespuesta());
             return ConvertirApiResponse.exito(responseEntity);
         }
     }

@@ -83,6 +83,7 @@ public class PedidoService {
     public ApiResponse crearPedido(CrearPedidoRequest request) {
         request.setLocal(Integer.parseInt(redis.codLocal()));
         request.setPuntoAtencion(Integer.parseInt(redis.codPtoAtencion()));
+        request.setPersonalAtencion(redis.codPersonal());
         if(Objeto.anyEmpty(request.getPersonalAtencion(), request.getFechaIngreso(),request.getLocal(),request.getPuntoAtencion()).booleanValue()){
             return ApiResponse.parametrosIncorrectos();
         }
