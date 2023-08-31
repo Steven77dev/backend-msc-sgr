@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EstadoRegistroRepository extends JpaRepository<EstadoRegistros, Long> {
-    @Query(value = "SELECT MAX(ESTADO_REGISTRO) FROM ESTADO_REGISTROS", nativeQuery = true)
+    @Query(value = "SELECT MAX(ESTADO_REGISTRO) FROM SYST.ESTADO_REGISTROS", nativeQuery = true)
     Long findMaxId();
 
 }

@@ -1,4 +1,4 @@
-package com.restaurante.microservicios.mscfinanzas.config;
+package com.restaurante.microservicios.msccatalogo.config;
 
 import io.swagger.v3.oas.models.info.Info;
 import org.springdoc.core.GroupedOpenApi;

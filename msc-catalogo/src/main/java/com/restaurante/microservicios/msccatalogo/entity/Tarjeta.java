@@ -1,4 +1,7 @@
-package com.interconectados.restaurante.model.entity;
+package com.restaurante.microservicios.msccatalogo.entity;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -7,15 +10,18 @@ import java.util.Objects;
 
 @Entity
 @IdClass(TarjetaPK.class)
+@Table(name ="TARJETA" ,schema = "FINA")
+@EqualsAndHashCode
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Tarjeta {
-    private short entidad;
-    private short tarjeta;
+    private int entidad;
+    private int tarjeta;
     private String descripcion;
     private String abreviatura;
     private BigDecimal porcentaje;
     private short banco;
     private short cuenta;
-    private short estadoRegistro;
+    private int estadoRegistro;
     private String creacionSesion;
     private Timestamp creacionFecha;
     private String controlSesion;
@@ -23,21 +29,21 @@ public class Tarjeta {
 
     @Id
     @Column(name = "ENTIDAD", nullable = false)
-    public short getEntidad() {
+    public int getEntidad() {
         return entidad;
     }
 
-    public void setEntidad(short entidad) {
+    public void setEntidad(int entidad) {
         this.entidad = entidad;
     }
 
     @Id
     @Column(name = "TARJETA", nullable = false)
-    public short getTarjeta() {
+    public int getTarjeta() {
         return tarjeta;
     }
 
-    public void setTarjeta(short tarjeta) {
+    public void setTarjeta(int tarjeta) {
         this.tarjeta = tarjeta;
     }
 
@@ -93,11 +99,11 @@ public class Tarjeta {
 
     @Basic
     @Column(name = "ESTADO_REGISTRO", nullable = false)
-    public short getEstadoRegistro() {
+    public int getEstadoRegistro() {
         return estadoRegistro;
     }
 
-    public void setEstadoRegistro(short estadoRegistro) {
+    public void setEstadoRegistro(int estadoRegistro) {
         this.estadoRegistro = estadoRegistro;
     }
 

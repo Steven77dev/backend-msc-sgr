@@ -1,4 +1,4 @@
-package com.interconectados.restaurante.model.entity;
+package com.restaurante.microservicios.msccatalogo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -6,26 +6,26 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class TarjetaPK implements Serializable {
-    private short entidad;
-    private short tarjeta;
+    private int entidad;
+    private int tarjeta;
 
     @Column(name = "ENTIDAD", nullable = false)
     @Id
-    public short getEntidad() {
+    public int getEntidad() {
         return entidad;
     }
 
-    public void setEntidad(short entidad) {
+    public void setEntidad(int entidad) {
         this.entidad = entidad;
     }
 
     @Column(name = "TARJETA", nullable = false)
     @Id
-    public short getTarjeta() {
+    public int getTarjeta() {
         return tarjeta;
     }
 
-    public void setTarjeta(short tarjeta) {
+    public void setTarjeta(int tarjeta) {
         this.tarjeta = tarjeta;
     }
 

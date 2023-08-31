@@ -1,4 +1,4 @@
-package com.restaurante.microservicios.mscfinanzas.config;
+package com.restaurante.microservicios.msccatalogo.config;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.hibernate.proxy.HibernateProxy;

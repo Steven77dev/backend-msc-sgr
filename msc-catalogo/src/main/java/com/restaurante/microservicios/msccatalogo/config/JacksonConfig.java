@@ -1,4 +1,4 @@
-package com.restaurante.microservicios.mscfinanzas.config;
+package com.restaurante.microservicios.msccatalogo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
