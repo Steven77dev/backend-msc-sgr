@@ -1,4 +1,4 @@
-package com.restaurante.microservicios.msccatalogo.dto.estadoRegistros;
+package com.restaurante.microservicios.msccatalogo.models.estadoRegistros;
 
 import lombok.Getter;
 import lombok.Setter;
