@@ -28,6 +28,10 @@ spring:
           uri: lb://msc-finanzas
           predicates:
             - Path=/finanzas/**
+        - id: msc-comercial
+          uri: lb://msc-comercial
+          predicates:
+            - Path=/comercial/**
         
 
       
