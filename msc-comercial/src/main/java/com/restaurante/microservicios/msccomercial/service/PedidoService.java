@@ -38,7 +38,7 @@ public class PedidoService {
     public Response<Object> listadoMesasLocal(BusqMesasRequest request){
         logger.info("Listado de mesas disponibles u ocupadas del local {}", request );
         List<Map<String, Object>> respuesta = pedidoRepository.listadoMesas(1, request.getEntidad(),request.getLocal(),request.getFecha(), request.getEstado());
-        List<ListadoMesasAtencionResponse> listadoMesasAtencionResponse = objectMapper.convertValue(respuesta,new TypeReference<List<ListadoMesasAtencionResponse>>() {});
+        List<ListadoMesasAtencionResponse> listadoMesasAtencionResponse = objectMapper.convertValue(respuesta,new TypeReference<>() {});
         return listadoMesasAtencionResponse.isEmpty() ? responseBuilder.respuestaSinResultado(null).getBody() : responseBuilder.respuestaConExito(listadoMesasAtencionResponse).getBody();
 
     }

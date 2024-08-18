@@ -15,7 +15,7 @@
 	<name>msccommon</name>
 	<description>Proyecto para objetos o clases reutilizables</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

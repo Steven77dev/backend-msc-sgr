@@ -14,7 +14,7 @@
 	<name>msc-persona</name>
 	<description>Microservicio para mantenimiento de personas</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.6</spring-cloud.version>
 	</properties>
 	<dependencies>
@@ -34,9 +34,9 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

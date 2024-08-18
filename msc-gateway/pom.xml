@@ -14,7 +14,7 @@
 	<name>msc-gateway</name>
 	<description>Configuración de la puerta de enlace para la comunicación con los microservicios</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.6</spring-cloud.version>
 	</properties>
 	<dependencies>
