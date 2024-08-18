@@ -32,6 +32,9 @@ spring:
           uri: lb://msc-comercial
           predicates:
             - Path=/comercial/**
-        
+        - id: msc-usuario
+          uri: lb://msc-usuario
+          predicates:
+            - Path=/usuario/**
 
       
