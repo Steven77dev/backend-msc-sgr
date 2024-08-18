@@ -2,6 +2,7 @@ server:
   port: 8761
 eureka:
   instance:
+    preferIpAddress: false
     hostname: eureka-server
   client:
     fetch-registry: false
