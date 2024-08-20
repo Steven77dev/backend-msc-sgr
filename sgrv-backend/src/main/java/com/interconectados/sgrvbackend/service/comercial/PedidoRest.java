@@ -1,5 +1,6 @@
 package com.interconectados.sgrvbackend.service.comercial;
 
+import com.interconectados.sgrvbackend.config.FeignClientConfig;
 import com.interconectados.sgrvbackend.models.request.*;
 import com.restaurante.microservicios.common.response.Response;
 import org.springframework.cloud.openfeign.FeignClient;

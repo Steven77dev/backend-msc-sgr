@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "msc-usuario", url = "http://localhost:8080")
+@FeignClient(name = "msc-usuario", url = "http://localhost:8094")
 public interface UsuarioRest {
 
     @PostMapping("/usuario/iniciarSesion")

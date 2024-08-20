@@ -7,5 +7,13 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8030
-
-
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 500000  # Tiempo en milisegundos para conectar
+        readTimeout: 1000000    # Tiempo en milisegundos para leer la respuesta
+        retryer:
+          period: 1000         # Intervalo de reintento en milisegundos
+          maxPeriod: 10000     # Máximo intervalo de reintento en milisegundos
+          maxAttempts: 5      # Número máximo de intentos
